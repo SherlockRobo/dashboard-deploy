@@ -1,0 +1,2081 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Tim Cook 没有辜负他的 Jobs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<style>
+  html{scroll-behavior:smooth}
+  :root{
+    --black:#000000;
+    --white:#FFFFFF;
+    --red:#E30613;
+    --gray:#8E8E93;
+    --gray-2:#2a2a2a;
+    --gray-3:#e7e7e7;
+    --ease: cubic-bezier(.22,.61,.36,1);
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:"Inter","Noto Sans SC","PingFang SC","Helvetica Neue",Arial,sans-serif;
+    font-weight:400;
+    color:var(--black);
+    background:var(--white);
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+    letter-spacing:-0.01em;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--red);color:#fff}
+  .zh{font-family:"Noto Sans SC","PingFang SC",sans-serif}
+  .mono{font-family:"JetBrains Mono",ui-monospace,monospace;letter-spacing:0}
+
+  /* ---------- Sections ---------- */
+  section{
+    position:relative;
+    min-height:100vh;
+    padding: clamp(80px, 10vw, 160px) clamp(32px, 8vw, 140px);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    overflow:hidden;
+  }
+  .sec-dark{background:var(--black);color:var(--white)}
+  .sec-light{background:var(--white);color:var(--black)}
+  .sec-dark ::selection{background:var(--white);color:#000}
+
+  .eyebrow{
+    font-family:"JetBrains Mono",monospace;
+    font-size:11px;
+    letter-spacing:0.3em;
+    text-transform:uppercase;
+    color:var(--gray);
+    margin-bottom:32px;
+    display:flex;
+    align-items:center;
+    gap:12px;
+  }
+  .eyebrow::before{
+    content:"";
+    width:24px;height:1px;background:currentColor;opacity:.6;
+  }
+
+  h1,h2,h3{font-weight:700;letter-spacing:-0.03em;line-height:1.02}
+  .display{
+    font-size: clamp(44px, 8vw, 132px);
+    font-weight:800;
+    letter-spacing:-0.045em;
+    line-height:0.98;
+  }
+  .title-xl{
+    font-size: clamp(36px, 5.5vw, 84px);
+    font-weight:700;
+    letter-spacing:-0.035em;
+    line-height:1.02;
+  }
+  .title-lg{
+    font-size: clamp(28px, 3.6vw, 56px);
+    font-weight:700;
+    letter-spacing:-0.025em;
+    line-height:1.08;
+  }
+  .body-lg{
+    font-size: clamp(17px, 1.5vw, 22px);
+    line-height:1.55;
+    font-weight:400;
+    letter-spacing:-0.005em;
+    max-width:780px;
+  }
+  .small{
+    font-size: 14px;
+    line-height:1.55;
+    color:var(--gray);
+  }
+  .sec-dark .small{color:#9a9a9e}
+
+  .accent{color:var(--red)}
+  .rule{height:1px;background:currentColor;opacity:.15;width:100%}
+
+  /* ---------- Reveal ---------- */
+  [data-reveal]{
+    opacity:0;
+    transform:translateY(28px);
+    transition: opacity 1s var(--ease), transform 1s var(--ease);
+  }
+  [data-reveal].in{opacity:1 !important;transform:none !important}
+  [data-reveal-delay="1"]{transition-delay:.08s}
+  [data-reveal-delay="2"]{transition-delay:.16s}
+  [data-reveal-delay="3"]{transition-delay:.24s}
+  [data-reveal-delay="4"]{transition-delay:.32s}
+  [data-reveal-delay="5"]{transition-delay:.4s}
+  [data-reveal-delay="6"]{transition-delay:.48s}
+
+  /* ---------- Side nav ---------- */
+  .nav{
+    position:fixed;
+    top:50%;
+    right: 28px;
+    transform: translateY(-50%);
+    z-index:50;
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+    mix-blend-mode: difference;
+  }
+  .nav a{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    color:#fff;
+    text-decoration:none;
+    font-family:"JetBrains Mono",monospace;
+    font-size:10px;
+    letter-spacing:0.15em;
+    text-transform:uppercase;
+    opacity:.5;
+    transition:opacity .3s var(--ease);
+  }
+  .nav a:hover,.nav a.active{opacity:1}
+  .nav a .dot{
+    width:22px;height:1px;background:currentColor;transition: width .3s var(--ease);
+  }
+  .nav a.active .dot{width:46px}
+  .nav a .lbl{opacity:0;transform:translateX(-4px);transition: all .3s var(--ease);white-space:nowrap}
+  .nav a:hover .lbl, .nav a.active .lbl{opacity:1;transform:none}
+  @media (max-width: 900px){ .nav{display:none} }
+
+  /* ---------- Scroll progress ---------- */
+  .progress{
+    position:fixed;top:0;left:0;height:2px;width:0%;background:var(--red);z-index:60;
+    transition: width .1s linear;
+  }
+
+  /* ---------- Top chrome ---------- */
+  .chrome{
+    position:fixed;top:0;left:0;right:0;z-index:40;
+    display:flex;justify-content:space-between;align-items:center;
+    padding: 20px clamp(24px,5vw,48px);
+    font-family:"JetBrains Mono",monospace;
+    font-size:11px;letter-spacing:.18em;text-transform:uppercase;
+    mix-blend-mode: difference;
+    color:#fff;
+    pointer-events:none;
+  }
+  .chrome .k{opacity:.6}
+
+  /* ---------- Section 1 Hero ---------- */
+  .hero{
+    min-height:100vh;
+    padding: 120px clamp(32px,8vw,140px) 80px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+  }
+  .hero-top{flex:1;display:flex;flex-direction:column;justify-content:center}
+  .hero h1{
+    font-size: clamp(48px, 9vw, 160px);
+    font-weight:800;
+    letter-spacing:-0.05em;
+    line-height:.95;
+    max-width: 15ch;
+  }
+  .hero .sub{
+    margin-top:36px;
+    font-size: clamp(20px, 2.4vw, 38px);
+    font-weight:300;
+    letter-spacing:-0.02em;
+    color:#bfbfbf;
+    font-style: italic;
+  }
+  .hero-bottom{
+    display:flex;justify-content:space-between;align-items:flex-end;
+    gap:24px;flex-wrap:wrap;
+    padding-top: 48px;
+    border-top: 1px solid rgba(255,255,255,.14);
+  }
+  .timeline-years{
+    display:flex;align-items:baseline;gap:28px;
+    font-family:"JetBrains Mono",monospace;
+    font-size: clamp(20px,2.4vw,40px);
+    letter-spacing:-.02em;
+  }
+  .timeline-years .dash{flex:0 0 120px;height:1px;background:#fff;align-self:center;opacity:.5}
+  .tribute-tag{
+    font-family:"JetBrains Mono",monospace;
+    font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:#9a9a9e;
+    text-align:right;
+  }
+
+  /* ---------- Quote / Section 2 ---------- */
+  .pullquote{
+    font-family:"Noto Serif SC",serif;
+    font-weight:400;
+    font-size: clamp(34px, 5.4vw, 88px);
+    line-height:1.15;
+    letter-spacing:-0.02em;
+    max-width: 22ch;
+  }
+  .pullquote .mark{
+    display:block;
+    font-family:"Inter",serif;
+    font-size: 1.3em;
+    font-weight:300;
+    line-height:0;
+    margin-bottom:.35em;
+    opacity:.3;
+  }
+
+  /* ---------- Reversal header strip ---------- */
+  .rev-strip{
+    display:flex;
+    align-items:center;
+    gap:20px;
+    padding: 30px clamp(32px,8vw,140px);
+    background: var(--black);
+    color:#fff;
+    font-family:"JetBrains Mono",monospace;
+    font-size: 12px;
+    letter-spacing: .32em;
+    text-transform:uppercase;
+    border-top: 1px solid rgba(255,255,255,.1);
+    border-bottom: 1px solid rgba(255,255,255,.1);
+  }
+  .rev-strip .num{
+    font-size: 14px;
+    color: var(--red);
+    font-weight:500;
+  }
+  .rev-strip .line{flex:1;height:1px;background:rgba(255,255,255,.2)}
+
+  /* ---------- Stats ---------- */
+  .hero-num{
+    font-size: clamp(80px, 18vw, 320px);
+    font-weight:800;
+    letter-spacing:-0.06em;
+    line-height:.88;
+    font-variant-numeric: tabular-nums;
+  }
+  .hero-num.red{color:var(--red)}
+  .compare-bar{
+    margin-top: 48px;
+    display:grid;
+    grid-template-columns: 1fr auto;
+    gap:12px 28px;
+    max-width: 780px;
+    font-family:"JetBrains Mono",monospace;
+    font-size: 13px;
+    letter-spacing:.08em;
+  }
+  .compare-bar .row{
+    display: grid;
+    grid-template-columns: 120px 1fr 100px;
+    align-items:center;
+    gap:16px;
+    padding: 14px 0;
+    border-top:1px solid rgba(255,255,255,.12);
+  }
+  .compare-bar .row:last-child{border-bottom:1px solid rgba(255,255,255,.12)}
+  .compare-bar .bar{
+    height:6px;background:rgba(255,255,255,.1);position:relative;overflow:hidden;
+  }
+  .compare-bar .bar .fill{
+    position:absolute;inset:0;
+    background:#fff;
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: transform 1.6s var(--ease);
+  }
+  .compare-bar .bar.red .fill{background:var(--red)}
+  .in .compare-bar .bar[data-fill="1"] .fill{transform:scaleX(1)}
+  .in .compare-bar .bar[data-fill=".257"] .fill{transform:scaleX(.257)}
+
+  /* ---------- Timeline ---------- */
+  .vtl{
+    position:relative;
+    padding-left: 28px;
+    display:grid;
+    gap: 40px;
+    margin-top: 60px;
+  }
+  .vtl::before{
+    content:"";position:absolute;left:3px;top:8px;bottom:8px;width:1px;background:rgba(255,255,255,.15);
+  }
+  .sec-light .vtl::before{background:rgba(0,0,0,.15)}
+  .vtl .node{position:relative}
+  .vtl .node::before{
+    content:"";position:absolute;left:-29px;top:10px;width:7px;height:7px;border-radius:50%;background:#fff;
+  }
+  .sec-light .vtl .node::before{background:#000}
+  .vtl .node.highlight::before{background:var(--red);box-shadow:0 0 0 6px rgba(227,6,19,.2)}
+  .vtl .year{
+    font-family:"JetBrains Mono",monospace;
+    font-size:13px;letter-spacing:.22em;color:var(--gray);margin-bottom:6px;
+  }
+  .vtl .ev{
+    font-size: clamp(20px, 2.2vw, 32px);
+    font-weight:500;
+    letter-spacing:-0.02em;
+    line-height:1.25;
+    max-width: 26ch;
+  }
+  .vtl .node.highlight .ev strong{color:var(--red);font-weight:700}
+
+  /* ---------- Three cols / LEC ---------- */
+  .three-col{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: currentColor;
+    margin-top: 72px;
+  }
+  .three-col > div{
+    background: var(--white);
+    padding: 48px 36px 56px;
+    display:flex;flex-direction:column;gap:14px;
+  }
+  .sec-dark .three-col > div{background:var(--black)}
+  .three-col .tag{
+    font-family:"JetBrains Mono",monospace;
+    font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gray);
+  }
+  .three-col .prod{
+    font-size: clamp(28px,3.2vw,44px);
+    font-weight:700;letter-spacing:-0.03em;margin-top: 4px;
+  }
+  .three-col .meta{
+    font-family:"JetBrains Mono",monospace;font-size:13px;color:var(--gray);letter-spacing:0;
+  }
+  .three-col .big{
+    font-size: clamp(20px,1.9vw,26px);font-weight:500;letter-spacing:-0.015em;margin-top: 16px;line-height:1.3;
+  }
+  .three-col .note{
+    margin-top:auto;padding-top: 36px;font-size:14px;color:var(--gray);line-height:1.55;border-top:1px solid rgba(0,0,0,.1);
+  }
+  .sec-dark .three-col .note{border-color:rgba(255,255,255,.15)}
+  @media (max-width:900px){ .three-col{grid-template-columns:1fr} }
+
+  /* ---------- Header quotes collage ---------- */
+  .collage{
+    margin-top: 56px;
+    display:grid;
+    gap:16px;
+    grid-template-columns: repeat(2, 1fr);
+    max-width:1100px;
+  }
+  .collage .q{
+    border:1px solid rgba(255,255,255,.15);
+    padding: 22px 24px;
+    font-family:"Noto Serif SC",serif;
+    font-size: clamp(16px,1.5vw,22px);
+    font-style:italic;
+    font-weight:400;
+    line-height:1.4;
+    position:relative;
+  }
+  .collage .q .src{
+    display:block;
+    margin-top:10px;
+    font-family:"JetBrains Mono",monospace;
+    font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gray);font-style:normal;
+  }
+  @media (max-width:760px){ .collage{grid-template-columns:1fr} }
+
+  /* ---------- Compare table ---------- */
+  .ctbl{
+    margin-top:56px;
+    width:100%;
+    border-collapse:collapse;
+    font-size: clamp(15px, 1.3vw, 18px);
+  }
+  .ctbl th, .ctbl td{
+    text-align:left;
+    padding: 22px 18px;
+    border-bottom: 1px solid rgba(0,0,0,.12);
+    vertical-align:top;
+  }
+  .ctbl th{
+    font-family:"JetBrains Mono",monospace;
+    font-weight:500;
+    font-size: 11px;
+    letter-spacing:.24em;
+    text-transform:uppercase;
+    color:var(--gray);
+    border-bottom-color: rgba(0,0,0,.25);
+  }
+  .ctbl td.dim{color:var(--gray)}
+  .ctbl td.apple{color:#000;font-weight:600}
+  .ctbl td.metric{font-family:"JetBrains Mono",monospace;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--gray)}
+  .ctbl .num{font-family:"JetBrains Mono",monospace;font-weight:500;font-variant-numeric:tabular-nums}
+  .ctbl tr.accent-row td{color:var(--red);font-weight:700}
+  .ctbl tr.accent-row td.metric{color:var(--gray);font-weight:500}
+
+  /* ---------- Section 10 cards ---------- */
+  .bigstat{
+    display:flex;
+    align-items:baseline;
+    gap: 40px;
+    flex-wrap:wrap;
+  }
+  .bigstat .n{
+    font-size: clamp(100px, 20vw, 360px);
+    font-weight:800;letter-spacing:-0.06em;line-height:.9;
+    font-variant-numeric:tabular-nums;
+  }
+  .bigstat .unit{
+    font-size: clamp(24px, 3vw, 40px);
+    font-weight:400;opacity:.75;letter-spacing:-0.02em;
+  }
+  .kcards{
+    margin-top: 72px;
+    display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(255,255,255,.15);
+    border:1px solid rgba(255,255,255,.15);
+  }
+  .kcards > div{
+    background:var(--black);padding:36px 32px;display:flex;flex-direction:column;gap:14px;min-height:240px;
+  }
+  .kcards .num{
+    font-family:"JetBrains Mono",monospace;
+    font-size:11px;letter-spacing:.28em;color:var(--gray);
+  }
+  .kcards .h{
+    font-size: clamp(22px, 2.1vw, 30px);font-weight:600;letter-spacing:-0.02em;line-height:1.2;
+  }
+  .kcards .d{font-size:14px;color:#bfbfbf;margin-top:auto;line-height:1.55}
+  @media (max-width:900px){ .kcards{grid-template-columns:1fr} }
+
+  /* ---------- Quadrant ---------- */
+  .quad{
+    display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;
+    gap:2px;background:rgba(0,0,0,.1);margin-top: 72px;
+    border:1px solid rgba(0,0,0,.1);
+  }
+  .quad > div{
+    background:var(--white);padding: 44px 40px;display:flex;flex-direction:column;gap:12px;min-height:300px;
+  }
+  .quad .metric{
+    font-family:"JetBrains Mono",monospace;
+    font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gray);
+  }
+  .quad .from-to{
+    margin-top: 4px;
+    font-size: clamp(18px,1.7vw,24px);font-weight:500;letter-spacing:-0.02em;
+  }
+  .quad .delta{
+    margin-top:auto;
+    font-size: clamp(44px, 5.5vw, 88px);
+    font-weight:800;letter-spacing:-0.05em;line-height:1;
+    font-variant-numeric:tabular-nums;
+  }
+  .quad .hint{font-size:13px;color:var(--gray);margin-top:10px}
+  @media (max-width:760px){ .quad{grid-template-columns:1fr} }
+
+  /* ---------- Three pillars (shareholder) ---------- */
+  .pillars{
+    margin-top:72px;
+    display:grid;grid-template-columns:repeat(3,1fr);
+    border-top:1px solid rgba(255,255,255,.15);
+    border-bottom:1px solid rgba(255,255,255,.15);
+  }
+  .pillars > div{
+    padding: 48px 32px;border-right:1px solid rgba(255,255,255,.15);
+    display:flex;flex-direction:column;gap:14px;
+  }
+  .pillars > div:last-child{border-right:none}
+  .pillars .label{
+    font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:var(--gray);
+  }
+  .pillars .v{
+    font-size: clamp(40px, 5.2vw, 80px);
+    font-weight:800;letter-spacing:-0.045em;line-height:1;
+    font-variant-numeric:tabular-nums;
+  }
+  .pillars .sub{font-size:13px;color:#bfbfbf;margin-top:8px;font-family:"JetBrains Mono",monospace;letter-spacing:.1em}
+  @media (max-width:900px){ .pillars{grid-template-columns:1fr} .pillars>div{border-right:none;border-bottom:1px solid rgba(255,255,255,.15)} }
+
+  /* ---------- Data band ---------- */
+  .band{
+    margin-top: 48px;
+    display:grid;grid-template-columns:repeat(4,1fr);gap: 1px;background:rgba(255,255,255,.15);
+  }
+  .band > div{
+    background:var(--black);padding: 28px 24px;display:flex;flex-direction:column;gap:6px;
+  }
+  .band .i{
+    font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.25em;color:var(--gray);
+  }
+  .band .v{font-size: clamp(22px,2vw,28px);font-weight:700;letter-spacing:-0.02em}
+  .band .t{font-size:13px;color:#bfbfbf}
+  @media (max-width:900px){ .band{grid-template-columns:repeat(2,1fr)} }
+
+  /* ---------- Reverse quote box ---------- */
+  .invbox{
+    margin-top:60px;
+    background:#fff;color:#000;
+    padding: 36px 40px;
+    font-family:"Noto Serif SC",serif;
+    font-size: clamp(16px,1.5vw,20px);
+    line-height:1.55;
+    max-width: 560px;
+    margin-left:auto;
+  }
+  .invbox strong{font-weight:700;color:var(--red)}
+
+  /* ---------- Two-up (successors) ---------- */
+  .twocol{
+    margin-top:72px;
+    display:grid;grid-template-columns:1fr 1fr;gap: 0;
+    border-top:1px solid rgba(0,0,0,.15);border-bottom:1px solid rgba(0,0,0,.15);
+  }
+  .twocol > div{
+    padding: 56px 44px;border-right:1px solid rgba(0,0,0,.15);display:flex;flex-direction:column;gap:18px;min-height:420px;
+  }
+  .twocol > div:last-child{border-right:none}
+  .twocol .portrait{
+    width:80px;height:80px;border-radius:50%;
+    background:
+      repeating-linear-gradient(45deg, #ddd 0 6px, #f2f2f2 6px 12px);
+    border:1px solid rgba(0,0,0,.1);
+    display:flex;align-items:center;justify-content:center;
+    font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--gray);letter-spacing:.18em;
+  }
+  .twocol .name{font-size: clamp(30px,3.2vw,48px);font-weight:700;letter-spacing:-0.03em}
+  .twocol .role{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--gray)}
+  .twocol ul{list-style:none;margin-top:12px;display:flex;flex-direction:column;gap:10px}
+  .twocol ul li{
+    padding-left:20px;position:relative;font-size:16px;line-height:1.5;
+  }
+  .twocol ul li::before{content:"";position:absolute;left:0;top:11px;width:8px;height:1px;background:currentColor;opacity:.5}
+  @media (max-width:900px){ .twocol{grid-template-columns:1fr} .twocol>div{border-right:none;border-bottom:1px solid rgba(0,0,0,.15)} }
+
+  /* ---------- End / goodbye ---------- */
+  .goodbye{
+    font-family:"Noto Serif SC",serif;
+    font-size: clamp(42px,7vw,120px);
+    font-weight:400;font-style:italic;
+    line-height:1.1;letter-spacing:-0.03em;
+    max-width: 16ch;
+  }
+  .sig{
+    margin-top: 48px;
+    font-family:"JetBrains Mono",monospace;font-size:13px;letter-spacing:.18em;color:#bfbfbf;
+  }
+
+  /* ---------- Footer ---------- */
+  footer{
+    background:#fff;color:#000;
+    padding: 72px clamp(32px,8vw,140px) 56px;
+    display:grid;grid-template-columns: 1fr auto;gap:24px;
+    border-top:1px solid rgba(0,0,0,.1);
+    align-items:end;
+  }
+  footer .mark{font-size: clamp(28px,3.5vw,56px);font-weight:800;letter-spacing:-0.035em;line-height:1}
+  footer .meta{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.14em;color:var(--gray);line-height:1.8;text-align:right}
+  @media (max-width:760px){ footer{grid-template-columns:1fr} footer .meta{text-align:left} }
+
+  /* ---------- Small utility ---------- */
+  .grid-dec{
+    position:absolute;inset:0;pointer-events:none;opacity:.04;
+    background-image:
+      linear-gradient(to right, currentColor 1px, transparent 1px);
+    background-size: calc(100%/12) 100%;
+  }
+  .ix{
+    position:absolute;top: 40px; left: clamp(32px,8vw,140px);
+    font-family:"JetBrains Mono",monospace;
+    font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gray);
+  }
+  @media (max-width:760px){
+    .ix{top:20px;left:24px}
+  }
+
+  /* Inverted bg text */
+  .big-eyebrow{
+    font-family:"JetBrains Mono",monospace;
+    font-size:12px;letter-spacing:.32em;text-transform:uppercase;color:var(--gray);margin-bottom:40px;
+  }
+
+  /* Huge number marker for reversal */
+  .rev-marker{
+    position:absolute;
+    top: 40px; right: clamp(32px,8vw,140px);
+    font-family:"JetBrains Mono",monospace;
+    font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--red);
+    display:flex;align-items:center;gap:10px;
+  }
+  .rev-marker .d{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 0 4px rgba(227,6,19,.2)}
+
+  /* Phrases below sections */
+  .cap{
+    margin-top: 28px;
+    font-size: clamp(15px, 1.2vw, 18px);
+    color: var(--gray);
+    max-width: 60ch;
+    line-height:1.6;
+  }
+
+  /* Closing pull */
+  .close-quote{
+    margin-top: 72px;
+    padding-top: 40px;
+    border-top:1px solid rgba(0,0,0,.15);
+    font-family:"Noto Serif SC",serif;
+    font-size: clamp(20px, 2.2vw, 30px);
+    font-style:italic;
+    line-height:1.4;
+    max-width: 40ch;
+  }
+  .sec-dark .close-quote{border-color:rgba(255,255,255,.15)}
+  .close-quote.red-accent strong{color:var(--red);font-weight:700;font-style:normal;font-family:"Noto Sans SC",sans-serif}
+
+  /* Buy-back comparison bar */
+  .epicbar{
+    margin-top: 48px;
+    padding: 30px 0;
+    border-top:1px solid rgba(255,255,255,.15);
+    border-bottom:1px solid rgba(255,255,255,.15);
+    display:flex;flex-direction:column;gap:10px;
+  }
+  .epicbar .raw{
+    font-family:"JetBrains Mono",monospace;
+    font-size: clamp(20px, 2.6vw, 40px);
+    font-weight:500;letter-spacing:-0.01em;
+    color:var(--red);
+  }
+  .epicbar .eq{font-size: clamp(15px,1.3vw,19px);color:#cfcfcf;line-height:1.5}
+
+  /* Hover card for compare table apple column */
+  .ctbl td.apple{position:relative}
+  .ctbl tr:hover td{background: rgba(0,0,0,.03)}
+
+  /* ========= Hero enhancements ========= */
+  .hero{
+    background: radial-gradient(ellipse at center, #1a1a1a 0%, #000000 70%);
+  }
+  .hero .redline{
+    display:block;width:0;height:2px;background:var(--red);margin-top:40px;
+    transition: width 1.4s var(--ease) .3s;
+  }
+  .hero.in .redline, .hero-top.in .redline{width:200px}
+  [data-reveal].in .redline{width:200px}
+  .hero-scroll{
+    position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+    color:#fff;opacity:.4;font-size:22px;
+    animation: breathe 2.4s ease-in-out infinite;
+  }
+  @keyframes breathe{
+    0%,100%{opacity:.25;transform:translate(-50%, 0)}
+    50%{opacity:.85;transform:translate(-50%, 6px)}
+  }
+
+  /* ========= Section 4: extra NDX bar ========= */
+  .in .compare-bar .bar[data-fill=".345"] .fill{transform:scaleX(.345)}
+
+  /* ========= Section 6: horizontal chip timeline ========= */
+  .chip-tl{
+    margin-top: 80px; position:relative;
+    padding: 20px 0 60px;
+  }
+  .chip-tl svg{width:100%;height:auto;display:block;overflow:visible}
+  .chip-tl .node-g{cursor:pointer}
+  .chip-tl .node-c{
+    fill: #111; stroke: rgba(255,255,255,.3); stroke-width:1.5;
+    transition: all .3s var(--ease);
+  }
+  .chip-tl .node-g.hl .node-c{fill:var(--red);stroke:var(--red)}
+  .chip-tl .node-g:hover .node-c{stroke:#fff;stroke-width:2;r:22}
+  .chip-tl .node-g.hl:hover .node-c{fill:#fff;stroke:var(--red)}
+  .chip-tl .dash{stroke:rgba(255,255,255,.25);stroke-width:1;stroke-dasharray:4 6;fill:none;
+    stroke-dashoffset:1000; transition: stroke-dashoffset 2s var(--ease) .3s;}
+  .in .chip-tl .dash{stroke-dashoffset:0}
+  .chip-tl .year-lbl{
+    fill:#8E8E93;font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:2px;
+  }
+  .chip-tl .node-g.hl .year-lbl{fill:var(--red)}
+  .chip-tl .tooltip{
+    position:absolute;
+    background:#fff;color:#000;
+    padding:14px 18px;border-radius:12px;
+    font-size:13px;line-height:1.45;
+    box-shadow:0 20px 40px rgba(0,0,0,.4);
+    min-width:200px;max-width:280px;
+    pointer-events:none;opacity:0 !important;
+    visibility:hidden;
+    transition: opacity .25s var(--ease), transform .25s var(--ease);
+    transform: translate(-50%, -10px);
+    z-index:5;
+  }
+  .chip-tl .tooltip.show{opacity:1 !important;visibility:visible;transform:translate(-50%, 0)}
+  .chip-tl .tooltip .y{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.2em;color:var(--gray);margin-bottom:6px}
+  .chip-tl .tooltip .t{font-weight:600;font-size:14px}
+
+  /* ========= Section 7: numbered corner + hover lift + timeline ========= */
+  .three-col > div{
+    position:relative; padding-top:72px;
+    transition: transform .4s var(--ease), box-shadow .4s var(--ease);
+  }
+  .three-col > div .corner{
+    position:absolute;top:28px;left:36px;right:36px;
+    display:flex;justify-content:space-between;align-items:center;
+    font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.3em;color:var(--gray);
+  }
+  .three-col > div .corner .n{font-size:22px;font-weight:700;color:#000;letter-spacing:-0.02em}
+  .sec-dark .three-col > div .corner .n{color:#fff}
+  .three-col > div:hover{transform:translateY(-8px);box-shadow:0 30px 60px rgba(0,0,0,.12);z-index:2}
+  .sec-dark .three-col > div:hover{box-shadow:0 30px 60px rgba(227,6,19,.15)}
+  .lec-tl{
+    margin-top: 40px; padding: 28px 0 0;
+    display:flex;justify-content:space-between;align-items:center;gap:16px;
+    border-top:1px solid rgba(0,0,0,.15);
+    font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.24em;color:var(--gray);
+  }
+  .lec-tl .seg{flex:1;height:1px;background:rgba(0,0,0,.25);position:relative}
+  .lec-tl .seg::after{content:"";position:absolute;left:50%;top:-3px;width:7px;height:7px;border-radius:50%;background:#000;transform:translateX(-50%)}
+  .lec-tl .yr{position:relative}
+  .lec-tl .yr.hl{color:var(--red);font-weight:700}
+
+  /* ========= Section 9 VS cards ========= */
+  .vs-wrap{
+    margin-top:56px;display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:stretch;
+  }
+  .vs-wrap .vs{
+    display:flex;align-items:center;justify-content:center;padding:0 20px;
+    font-family:"JetBrains Mono",monospace;font-size:14px;letter-spacing:.3em;color:var(--gray);
+    position:relative;
+  }
+  .vs-wrap .vs::before,.vs-wrap .vs::after{content:"";display:block;position:absolute;left:50%;width:1px;background:rgba(0,0,0,.2)}
+  .vs-wrap .vs::before{top:0;height:calc(50% - 22px)}
+  .vs-wrap .vs::after{bottom:0;height:calc(50% - 22px)}
+  .vs-card{
+    padding:40px 36px;display:flex;flex-direction:column;gap:22px;
+  }
+  .vs-card.them{background:#f3f3f4;color:#000;border:1px solid rgba(0,0,0,.08)}
+  .vs-card.us{background:#000;color:#fff;border:1px solid var(--red)}
+  .vs-card .hd{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.28em;text-transform:uppercase}
+  .vs-card.them .hd{color:var(--gray)}
+  .vs-card.us .hd{color:var(--red)}
+  .vs-card .nm{font-size: clamp(22px,2.3vw,30px);font-weight:700;letter-spacing:-0.02em}
+  .vs-row{
+    padding:14px 0;border-top:1px solid currentColor;border-top-color:rgba(255,255,255,.12);
+    display:flex;justify-content:space-between;align-items:baseline;gap:16px;
+  }
+  .vs-card.them .vs-row{border-top-color:rgba(0,0,0,.12)}
+  .vs-row .k{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--gray)}
+  .vs-row .v{font-weight:600;font-size:clamp(15px,1.4vw,19px);text-align:right}
+  .vs-row .v.down{color:var(--red)}
+  .vs-row .v.up{color:#34C759}
+  .vs-row .arrow{margin-right:6px;font-size:12px;vertical-align: 1px}
+  @media (max-width:900px){
+    .vs-wrap{grid-template-columns:1fr}
+    .vs-wrap .vs{padding:18px 0;flex-direction:row;gap:14px}
+    .vs-wrap .vs::before,.vs-wrap .vs::after{display:none}
+  }
+
+  /* ========= Section 10 mini map + icons ========= */
+  .wmap{margin-top:56px;max-width:1100px}
+  .wmap svg{width:100%;height:auto;display:block}
+  .wmap .dot{fill:var(--red);opacity:0;transition: opacity 1s var(--ease)}
+  .in .wmap .dot{opacity:.85}
+  .wmap .continent{fill:rgba(255,255,255,.06);stroke:rgba(255,255,255,.18);stroke-width:.5}
+  .kcards .icon{
+    width:44px;height:44px;margin-bottom:4px;
+    display:flex;align-items:center;justify-content:center;
+    border:1px solid rgba(255,255,255,.2);border-radius:10px;
+  }
+  .kcards .icon svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:1.6}
+
+  /* ========= Section 11 mini charts ========= */
+  .quad > div{position:relative;overflow:hidden}
+  .quad .mini{
+    margin-top:auto;margin-bottom:14px;height:80px;display:flex;align-items:flex-end;gap:14px;
+  }
+  .quad .mbar{flex:1;background:#000;position:relative;border-radius:2px 2px 0 0;
+    height:0; transition: height 1.5s var(--ease);}
+  .quad > div.in .mbar[data-h="30"]{height:30%}
+  .quad > div.in .mbar[data-h="100"]{height:100%}
+  .quad > div.in .mbar[data-h="23"]{height:23%}
+  .quad > div.in .mbar[data-h="88"]{height:88%}
+  .quad > div.in .mbar[data-h="9"]{height:9%}
+  .quad > div.in .mbar[data-h="60"]{height:60%}
+  .quad .mbar.red{background:var(--red)}
+  .quad .mbar .lbl{position:absolute;top:-20px;left:0;right:0;text-align:center;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.12em;color:var(--gray)}
+  .quad .mini-axis{display:flex;gap:14px;font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.14em;color:var(--gray);text-align:center;margin-bottom:6px}
+  .quad .mini-axis span{flex:1}
+  .quad .line-chart{margin-top:auto;margin-bottom:14px;height:80px;width:100%}
+  .quad .line-chart svg{width:100%;height:100%;overflow:visible}
+  .quad .line-chart .pl{fill:none;stroke:#000;stroke-width:2;stroke-dasharray:600;stroke-dashoffset:600;transition:stroke-dashoffset 1.6s var(--ease) .3s}
+  .quad > div.in .line-chart .pl{stroke-dashoffset:0}
+  .quad .line-chart .pt{fill:#000;opacity:0;transition:opacity .4s var(--ease)}
+  .quad > div.in .line-chart .pt{opacity:1;transition-delay:1.4s}
+  .quad .line-chart .pt.hl{fill:var(--red)}
+  .quad .donut{margin-top:auto;margin-bottom:14px;display:flex;align-items:center;gap:24px}
+  .quad .donut svg{width:90px;height:90px}
+  .quad .donut .track{fill:none;stroke:rgba(0,0,0,.1);stroke-width:14}
+  .quad .donut .arc{fill:none;stroke:var(--red);stroke-width:14;stroke-linecap:butt;
+    stroke-dasharray:0 251; transition: stroke-dasharray 1.6s var(--ease) .2s;}
+  .quad > div.in .donut .arc{stroke-dasharray:60 251}
+  .quad .donut-legend{font-size:12px;color:var(--gray);line-height:1.5}
+  .quad .donut-legend b{color:#000;font-weight:700}
+
+  /* ========= Section 12 pillar bars ========= */
+  .pillars > div{position:relative;padding-bottom:200px}
+  .pillar-bar{
+    position:absolute;left:32px;right:32px;bottom:32px;
+    background:rgba(255,255,255,.08);
+    height:0;transition: height 1.6s var(--ease) .2s;
+  }
+  .pillars > div.in .pillar-bar[data-h="100"]{height:160px}
+  .pillars > div.in .pillar-bar[data-h="43"]{height:69px}
+  .pillars > div.in .pillar-bar[data-h="28"]{height:45px}
+  .pillar-bar.red{background:var(--red)}
+  .pillar-bar.red::before{content:"";position:absolute;top:-4px;left:0;right:0;height:4px;background:#fff}
+
+  /* ========= Section 14 coda ========= */
+  #s14{background:#0a0a0a;position:relative}
+  #s14::before{
+    content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(255,255,255,.02) 0%, transparent 40%),
+      radial-gradient(circle at 80% 70%, rgba(227,6,19,.03) 0%, transparent 40%);
+  }
+  .goodbye{font-size: clamp(64px, 10.5vw, 180px) !important}
+  .sig-hw{
+    font-family:"Noto Serif SC",cursive;
+    font-size:clamp(28px,3.6vw,54px);font-style:italic;font-weight:400;
+    color:#fff;letter-spacing:-0.01em;
+    margin-top:28px;transform:rotate(-3deg);display:inline-block;
+    border-bottom:1px solid rgba(255,255,255,.25);padding-bottom:4px;
+  }
+
+  /* ========= TSR line chart ========= */
+  .tsr-chart{margin-top:56px;width:100%;position:relative}
+  .tsr-chart svg{width:100%;height:auto;display:block;overflow:visible}
+  .tsr-chart .axis{stroke:rgba(255,255,255,.15);stroke-width:1}
+  .tsr-chart .glbl{fill:#8E8E93;font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.1em}
+  .tsr-chart .ylbl{fill:#8E8E93;font-family:"JetBrains Mono",monospace;font-size:10px}
+  .tsr-chart .aapl-line{fill:none;stroke:var(--red);stroke-width:2.5;stroke-dasharray:2000;stroke-dashoffset:2000;transition:stroke-dashoffset 2.4s var(--ease) .3s}
+  .tsr-chart .spx-line{fill:none;stroke:#fff;stroke-width:2;stroke-dasharray:2000;stroke-dashoffset:2000;opacity:.65;transition:stroke-dashoffset 2.4s var(--ease) .5s}
+  .in .tsr-chart .aapl-line,.in .tsr-chart .spx-line{stroke-dashoffset:0}
+  .tsr-chart .pt{opacity:0;transition: opacity .3s var(--ease) 2.4s}
+  .in .tsr-chart .pt{opacity:1}
+  .tsr-chart .end-lbl{font-family:"JetBrains Mono",monospace;font-size:12px;font-weight:600}
+  .tsr-chart .end-aapl{fill:var(--red)}
+  .tsr-chart .end-spx{fill:#fff;opacity:.8}
+  .tsr-legend{display:flex;gap:32px;margin-top:24px;font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.1em;color:#9a9a9e}
+  .tsr-legend .sw{display:inline-block;width:20px;height:2px;margin-right:10px;vertical-align:middle}
+  .tsr-legend .sw.r{background:var(--red)}
+  .tsr-legend .sw.w{background:#fff;opacity:.65}
+
+  /* ========= Product timeline ========= */
+  .ptl{margin-top:72px;position:relative;padding:30px 0 20px}
+  .ptl .spine{position:absolute;left:0;right:0;top:50%;height:1px;background:rgba(0,0,0,.15)}
+  .ptl-track{display:grid;grid-template-columns:repeat(8,1fr);gap:12px;position:relative;z-index:2}
+  .ptl-item{
+    display:flex;flex-direction:column;align-items:center;gap:10px;
+    text-align:center;position:relative;
+    opacity:0;transform:translateY(16px);
+    transition:opacity .6s var(--ease), transform .6s var(--ease);
+  }
+  .in .ptl-item{opacity:1;transform:none}
+  .in .ptl-item:nth-child(1){transition-delay:.05s}
+  .in .ptl-item:nth-child(2){transition-delay:.15s}
+  .in .ptl-item:nth-child(3){transition-delay:.25s}
+  .in .ptl-item:nth-child(4){transition-delay:.35s}
+  .in .ptl-item:nth-child(5){transition-delay:.45s}
+  .in .ptl-item:nth-child(6){transition-delay:.55s}
+  .in .ptl-item:nth-child(7){transition-delay:.65s}
+  .in .ptl-item:nth-child(8){transition-delay:.75s}
+  .ptl-year{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.18em;color:var(--gray);font-weight:500}
+  .ptl-dot{width:10px;height:10px;border-radius:50%;background:#000;position:relative;z-index:2}
+  .ptl-item.hl .ptl-dot{background:var(--red);box-shadow:0 0 0 5px rgba(227,6,19,.18)}
+  .ptl-prod{font-size:13px;font-weight:600;letter-spacing:-0.01em;line-height:1.25;max-width:14ch;min-height:2.4em}
+  .ptl-item.hl .ptl-prod{color:var(--red)}
+  .ptl-tag{font-family:"JetBrains Mono",monospace;font-size:9px;letter-spacing:.2em;color:var(--gray);text-transform:uppercase}
+  @media (max-width:900px){
+    .ptl-track{grid-template-columns:repeat(2,1fr);gap:32px 20px}
+    .ptl .spine{display:none}
+  }
+
+  /* ========= SECTION R · Retirement ========= */
+  .ret-wrap{max-width:1200px;margin:0 auto}
+  .ret-card{
+    background:#fff;color:#000;border-radius:16px;
+    max-width:560px;margin:72px auto 0;padding:72px 56px;
+    text-align:center;
+    box-shadow:0 20px 80px rgba(255,255,255,.04);
+  }
+  .ret-card .ret-date{
+    font-family:"JetBrains Mono",monospace;
+    font-size:13px;letter-spacing:.2em;color:#8E8E93;
+    font-weight:500;
+  }
+  .ret-card .ret-line1{
+    font-family:'Noto Sans SC',sans-serif;
+    font-size:20px;font-weight:600;color:#000;
+    margin-top:10px;
+  }
+  .ret-arrow{
+    display:block;margin:36px auto 32px;
+    font-size:28px;color:#8E8E93;
+    animation:retFloat 2.4s ease-in-out infinite;
+    line-height:1;
+  }
+  @keyframes retFloat{
+    0%,100%{transform:translateY(0);opacity:.55}
+    50%{transform:translateY(8px);opacity:1}
+  }
+  .ret-card .ret-divider{
+    height:1px;background:rgba(0,0,0,.1);margin:28px 0;
+  }
+  .ret-big{
+    font-family:'Inter',sans-serif;
+    font-size:clamp(72px,11vw,140px);
+    font-weight:900;color:var(--red);
+    letter-spacing:-.04em;line-height:1;
+    font-variant-numeric:tabular-nums;
+    font-feature-settings:"tnum" 1;
+  }
+  .ret-pct{
+    margin-top:18px;
+    font-family:"JetBrains Mono",monospace;
+    font-size:18px;letter-spacing:.1em;color:#8E8E93;
+    font-weight:500;
+  }
+  .ret-cagr{
+    margin-top:24px;display:inline-flex;align-items:baseline;gap:10px;
+    padding:10px 20px;border-radius:999px;
+    background:rgba(227,6,19,.08);
+    border:1px solid rgba(227,6,19,.25);
+  }
+  .ret-cagr .lbl{
+    font-family:"JetBrains Mono",monospace;
+    font-size:10px;letter-spacing:.22em;color:#8E8E93;
+    text-transform:uppercase;font-weight:500;
+  }
+  .ret-cagr .val{
+    font-family:'Inter',sans-serif;
+    font-size:20px;font-weight:800;color:var(--red);
+    letter-spacing:-.01em;
+    font-variant-numeric:tabular-nums;
+  }
+  /* 3-col comparison */
+  .ret-cols{
+    display:grid;grid-template-columns:repeat(3,1fr);
+    gap:24px;margin-top:88px;
+  }
+  .ret-col{
+    border:1px solid rgba(255,255,255,.1);
+    border-radius:12px;padding:36px 28px 32px;
+    background:rgba(255,255,255,.02);
+    display:flex;flex-direction:column;
+  }
+  .ret-col.hl{
+    border-color:var(--red);
+    background:rgba(227,6,19,.06);
+  }
+  .ret-col-name{
+    font-family:"JetBrains Mono",monospace;
+    font-size:12px;letter-spacing:.22em;color:#8E8E93;
+    font-weight:500;
+  }
+  .ret-col.hl .ret-col-name{color:var(--red)}
+  .ret-col-start{
+    margin-top:22px;font-size:15px;color:#8E8E93;
+    font-family:"JetBrains Mono",monospace;
+  }
+  .ret-col-down{
+    color:#8E8E93;font-size:14px;margin:6px 0 10px;
+    opacity:.5;line-height:1;
+  }
+  .ret-col-end{
+    font-family:'Inter',sans-serif;
+    font-size:36px;font-weight:800;color:#fff;
+    letter-spacing:-.02em;line-height:1.1;
+    font-variant-numeric:tabular-nums;
+    font-feature-settings:"tnum" 1;
+  }
+  .ret-col.hl .ret-col-end{color:var(--red)}
+  .ret-col-pct{
+    font-family:"JetBrains Mono",monospace;
+    font-size:13px;letter-spacing:.08em;color:#8E8E93;
+    margin-top:4px;font-weight:500;
+  }
+  .ret-col-cagr{
+    margin-top:14px;padding-top:14px;
+    border-top:1px dashed rgba(255,255,255,.08);
+    display:flex;justify-content:space-between;align-items:baseline;
+  }
+  .ret-col-cagr .k{
+    font-family:"JetBrains Mono",monospace;
+    font-size:10px;letter-spacing:.22em;color:#666;
+    text-transform:uppercase;font-weight:500;
+  }
+  .ret-col-cagr .v{
+    font-family:'Inter',sans-serif;
+    font-size:20px;font-weight:700;color:#fff;
+    letter-spacing:-.01em;opacity:.85;
+    font-variant-numeric:tabular-nums;
+  }
+  .ret-col.hl .ret-col-cagr .v{color:var(--red);opacity:1}
+  .ret-col.hl .ret-col-cagr{border-top-color:rgba(227,6,19,.2)}
+  .ret-col.hl .ret-col-pct{color:var(--red);opacity:.9}
+  .ret-bar-wrap{
+    margin-top:28px;height:8px;background:rgba(255,255,255,.06);
+    border-radius:4px;overflow:hidden;
+  }
+  .ret-bar{
+    height:100%;background:#8E8E93;
+    width:0;border-radius:4px;
+    transition:width 1.4s var(--ease);
+  }
+  .ret-col.hl .ret-bar{background:var(--red)}
+  .in .ret-col:nth-child(1) .ret-bar{width:29%;transition-delay:.2s}
+  .in .ret-col:nth-child(2) .ret-bar{width:38%;transition-delay:.5s}
+  .in .ret-col:nth-child(3) .ret-bar{width:100%;transition-delay:.8s}
+  .ret-col-tag{
+    font-family:'Noto Sans SC',sans-serif;
+    font-size:13px;color:#8E8E93;margin-top:14px;
+    font-weight:500;letter-spacing:.02em;
+  }
+  .ret-col.hl .ret-col-tag{color:var(--red)}
+  .ret-closing{
+    margin-top:120px;text-align:center;
+  }
+  .ret-closing .zh{
+    font-family:'Noto Serif SC',serif;
+    font-size:clamp(32px,4.4vw,52px);
+    font-weight:700;color:var(--red);
+    line-height:1.25;letter-spacing:-.01em;
+  }
+  .ret-closing .en{
+    margin-top:28px;
+    font-family:'Inter',serif;font-style:italic;
+    font-size:clamp(18px,2vw,22px);
+    color:#fff;opacity:.7;letter-spacing:.01em;
+    font-weight:300;
+  }
+  .ret-footer{
+    margin-top:120px;text-align:center;
+    font-family:"JetBrains Mono",monospace;
+    font-size:11px;color:#666;letter-spacing:.08em;
+    line-height:1.9;
+  }
+  @media (max-width:820px){
+    .ret-cols{grid-template-columns:1fr;gap:16px;margin-top:64px}
+    .ret-card{padding:56px 32px;margin-top:56px}
+  }
+
+  /* ========= Mobile nav ========= */
+  @media (max-width: 900px){
+    body{font-size:14px}
+    .chrome{font-size:9px;padding:14px 20px}
+    .title-xl,h2.title-xl{font-size:clamp(32px,8vw,52px) !important}
+    .hero h1{font-size:clamp(42px,10vw,72px)}
+    .display,.hero-num{font-size:clamp(64px,20vw,160px) !important}
+    .mobile-nav{
+      position:fixed;bottom:0;left:0;right:0;z-index:50;
+      display:flex;gap:4px;overflow-x:auto;padding:12px 16px;
+      background:rgba(0,0,0,.85);backdrop-filter:blur(20px);
+      border-top:1px solid rgba(255,255,255,.1);
+      scrollbar-width:none;
+    }
+    .mobile-nav::-webkit-scrollbar{display:none}
+    .mobile-nav a{
+      flex-shrink:0;padding:8px 14px;border-radius:20px;
+      color:#fff;text-decoration:none;font-size:11px;letter-spacing:.15em;text-transform:uppercase;
+      font-family:"JetBrains Mono",monospace;
+      border:1px solid rgba(255,255,255,.2);
+    }
+    .mobile-nav a.active{background:var(--red);border-color:var(--red)}
+  }
+  /* ---------- Dual donut (Section 11 Services) ---------- */
+  .donut-pair{
+    display:flex;gap:24px;margin-top:16px;align-items:flex-end;justify-content:flex-start;
+  }
+  .donut-pair .dp-item{display:flex;flex-direction:column;align-items:center;gap:8px}
+  .donut-pair .dp-svg{width:96px;height:96px}
+  .donut-pair .dp-lbl{
+    font-family:"JetBrains Mono",monospace;
+    font-size:10px;letter-spacing:.2em;color:var(--gray);
+    font-weight:500;
+  }
+  .donut-pair .dp-arc{
+    transition:stroke-dashoffset 1.6s var(--ease);
+  }
+  /* baseline hidden; reveal computes via JS */
+
+  @media (min-width:901px){ .mobile-nav{display:none} }
+
+  /* ---------- Photography ---------- */
+  .photo{
+    position:relative;margin:48px auto 0;
+    max-width:920px;width:100%;
+    border-radius:4px;overflow:hidden;
+    background:#0a0a0a;
+    box-shadow:0 30px 80px rgba(0,0,0,.35), 0 10px 30px rgba(0,0,0,.2);
+  }
+  .photo img{display:block;width:100%;height:auto;filter:saturate(.92) contrast(1.02)}
+  .sec-light .photo{box-shadow:0 30px 80px rgba(0,0,0,.15), 0 10px 30px rgba(0,0,0,.08)}
+  .photo-cap{
+    margin-top:18px;text-align:center;
+    font-family:"JetBrains Mono",monospace;
+    font-size:10px;letter-spacing:.22em;
+    color:var(--gray);text-transform:uppercase;font-weight:500;
+  }
+  .photo-cap .dim{opacity:.5}
+
+  /* Succession full-bleed photo */
+  .photo-succ{
+    position:relative;margin:56px auto 0;
+    width:100%;max-width:1200px;
+    border-radius:4px;overflow:hidden;
+    aspect-ratio:3/2;
+    background:#0a0a0a;
+  }
+  .photo-succ img{
+    position:absolute;inset:0;width:100%;height:100%;
+    object-fit:cover;
+    filter:saturate(.92) contrast(1.02);
+  }
+  .photo-succ .overlay{
+    position:absolute;inset:0;
+    background:linear-gradient(180deg, rgba(0,0,0,0) 40%, rgba(0,0,0,.75) 100%);
+  }
+  .photo-succ .tags{
+    position:absolute;left:32px;right:32px;bottom:28px;
+    display:flex;gap:24px;flex-wrap:wrap;align-items:flex-end;
+    color:#fff;
+  }
+  .photo-succ .tag-block .rel{
+    font-family:"JetBrains Mono",monospace;
+    font-size:10px;letter-spacing:.22em;
+    opacity:.7;margin-bottom:6px;text-transform:uppercase;
+  }
+  .photo-succ .tag-block .nm{
+    font-family:'Inter',sans-serif;font-weight:700;
+    font-size:clamp(22px,2.6vw,32px);letter-spacing:-.01em;
+  }
+
+  /* ---------- Hero Apple logo watermark ---------- */
+  .hero{position:relative;overflow:hidden}
+  .hero-wm{
+    position:absolute;right:-8%;bottom:-10%;
+    height:60vh;width:auto;
+    opacity:.03;
+    pointer-events:none;z-index:0;
+  }
+  .hero .hero-top, .hero .hero-bottom, .hero .ix, .hero .hero-scroll{position:relative;z-index:2}
+
+  /* ---------- Section 7 product icons ---------- */
+  .pic{
+    width:56px;height:56px;margin:0 0 22px;
+    display:block;
+    stroke:currentColor;fill:none;
+    stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;
+    opacity:.75;
+  }
+
+</style>
+</head>
+<body>
+
+<template id="__bundler_thumbnail" data-bg-color="#000000">
+  <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+    <rect width="1200" height="800" fill="#000000"/>
+    <text x="600" y="360" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="120" font-weight="800" fill="#FFFFFF" letter-spacing="-4">TIM COOK</text>
+    <text x="600" y="460" text-anchor="middle" font-family="Helvetica, Arial, sans-serif" font-size="48" font-weight="300" font-style="italic" fill="#8E8E93">2011 — 2026</text>
+    <line x1="500" y1="530" x2="700" y2="530" stroke="#E30613" stroke-width="3"/>
+    <text x="600" y="600" text-anchor="middle" font-family="monospace" font-size="18" letter-spacing="6" fill="#8E8E93">AN INVESTOR'S TRIBUTE</text>
+  </svg>
+</template>
+
+<div class="progress" id="progress"></div>
+
+<div class="chrome">
+  <div><span class="k">Tribute /</span> Tim Cook 2011–2026</div>
+  <div class="k">An Investor's Note</div>
+</div>
+
+<nav class="nav" id="nav">
+  <a href="#s1"><span class="lbl">Opening</span><span class="dot"></span></a>
+  <a href="#s3"><span class="lbl">Reversal I</span><span class="dot"></span></a>
+  <a href="#s5"><span class="lbl">Reversal II</span><span class="dot"></span></a>
+  <a href="#s8"><span class="lbl">Reversal III</span><span class="dot"></span></a>
+  <a href="#s11"><span class="lbl">Business</span><span class="dot"></span></a>
+  <a href="#s12"><span class="lbl">Shareholders</span><span class="dot"></span></a>
+  <a href="#s13"><span class="lbl">Succession</span><span class="dot"></span></a>
+  <a href="#sR"><span class="lbl">Step Back</span><span class="dot"></span></a>
+  <a href="#s14"><span class="lbl">Coda</span><span class="dot"></span></a>
+</nav>
+
+<nav class="mobile-nav" id="mnav">
+  <a href="#s1">首屏</a>
+  <a href="#s3">逆转 I</a>
+  <a href="#s5">逆转 II</a>
+  <a href="#s8">逆转 III</a>
+  <a href="#s11">业绩</a>
+  <a href="#s12">股东</a>
+  <a href="#s13">接棒</a>
+  <a href="#sR">退居幕后</a>
+  <a href="#s14">结语</a>
+</nav>
+
+<!-- ================= SECTION 1 · HERO ================= -->
+<section id="s1" class="sec-dark hero" data-label="01 · Hero">
+  <svg class="hero-wm" viewBox="0 0 170 200" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <path fill="#fff" d="M130.2 104.6c-.2-22.9 18.7-33.9 19.5-34.4-10.6-15.6-27.2-17.7-33.1-17.9-14.1-1.4-27.5 8.3-34.7 8.3-7.2 0-18.2-8.1-30-7.9C36.5 52.9 22 62 14.1 76.3c-13.3 23-3.4 57 9.5 75.6 6.3 9.1 13.8 19.3 23.7 18.9 9.5-.4 13.1-6.1 24.6-6.1 11.4 0 14.7 6.1 24.8 5.9 10.2-.2 16.7-9.2 22.9-18.4 7.2-10.5 10.2-20.8 10.3-21.3-.2-.1-19.7-7.6-19.7-30.3zM110.7 38.9c5.2-6.3 8.8-15.1 7.8-23.9-7.5.3-16.7 5-22.1 11.3-4.8 5.5-9.1 14.4-7.9 23 8.4.6 17-4.2 22.2-10.4z"/>
+  </svg>
+  <span class="ix">01 / 15 — Opening</span>
+  <div class="hero-top">
+    <h1 class="zh" data-reveal>Tim&nbsp;Cook<br/>没&nbsp;有&nbsp;辜&nbsp;负<br/>他&nbsp;的&nbsp;Jobs.</h1>
+    <span class="redline" data-reveal data-reveal-delay="1"></span>
+    <div class="sub" data-reveal data-reveal-delay="2">He lived up to the Jobs.</div>
+  </div>
+  <div class="hero-bottom" data-reveal data-reveal-delay="3">
+    <div class="timeline-years">
+      <span>2011</span><span class="dash"></span><span>2026</span>
+    </div>
+    <div class="tribute-tag">An Investor's Tribute<br/>2026 · 04 · 21</div>
+  </div>
+  <div class="hero-scroll" aria-hidden="true">▼</div>
+</section>
+
+<!-- ================= SECTION 2 · OPENING DOUBT ================= -->
+<section id="s2" class="sec-light" data-label="02 · Doubt">
+  <span class="ix">02 / 15 — The Doubt</span>
+  <div class="eyebrow" data-reveal>August 24, 2011</div>
+  <div class="pullquote zh" data-reveal data-reveal-delay="1">
+    <span class="mark">"</span>一个管供应链的，<br/>凭什么接 Jobs 的班？
+  </div>
+  <div class="cap zh" data-reveal data-reveal-delay="2">
+    当天华尔街日报这样写。AAPL 收跌 0.65%。<br/>
+    会议室里最安静的那个人，成了世界上最贵公司的 CEO。
+  </div>
+</section>
+
+<!-- ================= REVERSAL I STRIP ================= -->
+<div class="rev-strip"><span class="num">REV · I</span><span>被看空的开始 · The Quiet Inheritance</span><span class="line"></span><span>§ 03 – 04</span></div>
+
+<!-- ================= SECTION 3 · The Quiet Inheritance ================= -->
+<section id="s3" class="sec-light" data-label="03 · Inheritance">
+  <span class="ix">03 / 15 — Inheritance</span>
+  <div class="eyebrow" data-reveal>Reversal I · Act 1</div>
+  <h2 class="title-xl zh" data-reveal data-reveal-delay="1">接过 Jobs 王冠<br/>的第一天。</h2>
+  <div class="body-lg zh" data-reveal data-reveal-delay="2" style="margin-top:36px">
+    Jobs 去世，市场恐慌。媒体给他的标签是"会议室里最安静的那个人"。
+    2012 年 Forbes 的封面直接写着：<span style="font-style:italic">"The Post-Jobs Apple Is In Trouble."</span>
+  </div>
+  <div class="close-quote zh" data-reveal data-reveal-delay="3">
+    那时没有人相信，一个做运营出身的人，能让这家公司继续伟大。
+  </div>
+</section>
+
+<!-- ================= SECTION 4 · HERO NUMBER ================= -->
+<section id="s4" class="sec-dark" data-label="04 · +1,886%">
+  <span class="ix">04 / 15 — Return</span>
+  <div class="eyebrow" data-reveal>Total Shareholder Return · 2011/08 → 2026/04</div>
+  <div data-reveal data-reveal-delay="1">
+    <div class="hero-num red counter" data-from="0" data-to="1886" data-prefix="+" data-suffix="%">+0%</div>
+  </div>
+  <div class="body-lg zh" data-reveal data-reveal-delay="2" style="margin-top:32px;color:#e5e5e5">
+    库克任期内的 AAPL 回报率。
+  </div>
+
+  <div class="compare-bar" data-reveal data-reveal-delay="3">
+    <div class="row">
+      <span>AAPL</span>
+      <span class="bar red" data-fill="1"><span class="fill"></span></span>
+      <span style="text-align:right">+1,886%</span>
+    </div>
+    <div class="row">
+      <span>NASDAQ 100</span>
+      <span class="bar" data-fill=".345"><span class="fill"></span></span>
+      <span style="text-align:right">+652%</span>
+    </div>
+    <div class="row">
+      <span>S&amp;P 500</span>
+      <span class="bar" data-fill=".257"><span class="fill"></span></span>
+      <span style="text-align:right">+483%</span>
+    </div>
+  </div>
+  <div class="cap zh" data-reveal data-reveal-delay="4" style="color:#9a9a9e">
+    跑赢大盘约 4 倍。接班时市值 $3,500 亿 → 今天 $4 万亿（+1,043%）。
+  </div>
+</section>
+
+<!-- ================= REVERSAL II STRIP ================= -->
+<div class="rev-strip"><span class="num">REV · II</span><span>不可能的任务 · The Silicon Coup</span><span class="line"></span><span>§ 05 – 07</span></div>
+
+<!-- ================= SECTION 5 · Impossible ================= -->
+<section id="s5" class="sec-light" data-label="05 · Impossible">
+  <span class="ix">05 / 15 — Impossible</span>
+  <div class="eyebrow" data-reveal>Reversal II · Act 1</div>
+  <h2 class="title-xl zh" data-reveal data-reveal-delay="1">Jobs 都没做成的事。</h2>
+  <div class="pullquote" data-reveal data-reveal-delay="2" style="margin-top:48px;font-size:clamp(24px,3.4vw,52px);font-style:italic">
+    "Apple will never make its own Mac chips."
+    <span style="display:block;font-size:13px;letter-spacing:.22em;text-transform:uppercase;color:var(--gray);font-style:normal;margin-top:16px;font-family:'JetBrains Mono',monospace">— Industry Analyst · 2018</span>
+  </div>
+  <div class="cap zh" data-reveal data-reveal-delay="3">
+    彼时苹果已向 Intel 采购芯片 15 年。整个 PC 行业认定：这是不可能的。
+  </div>
+</section>
+
+<!-- ================= SECTION 6 · The Quiet Revolution ================= -->
+<section id="s6" class="sec-dark" data-label="06 · 12 Years">
+  <span class="ix">06 / 15 — 12 Years</span>
+  <div class="eyebrow" data-reveal>Reversal II · Act 2</div>
+  <h2 class="title-xl zh" data-reveal data-reveal-delay="1">他花了 12 年，<br/>换掉一颗心脏。</h2>
+
+  <div class="chip-tl" data-reveal data-reveal-delay="2" id="chipTl">
+    <svg viewBox="0 0 1200 160" preserveAspectRatio="none">
+      <path class="dash" d="M 80 80 L 1120 80" pathLength="1000"/>
+      <g class="node-g" data-y="2008" data-t="挖来 Johny Srouji —— 后来的 A4 芯片之父" transform="translate(80,80)">
+        <circle class="node-c" r="18"/>
+        <text class="year-lbl" y="50" text-anchor="middle">2008</text>
+      </g>
+      <g class="node-g" data-y="2010" data-t="自研 A4 首用于 iPad" transform="translate(340,80)">
+        <circle class="node-c" r="18"/>
+        <text class="year-lbl" y="50" text-anchor="middle">2010</text>
+      </g>
+      <g class="node-g hl" data-y="2020" data-t="M1 发布，震惊行业" transform="translate(600,80)">
+        <circle class="node-c" r="20"/>
+        <text class="year-lbl" y="52" text-anchor="middle">2020</text>
+      </g>
+      <g class="node-g" data-y="2023" data-t="全线产品完成 Apple Silicon 化" transform="translate(860,80)">
+        <circle class="node-c" r="18"/>
+        <text class="year-lbl" y="50" text-anchor="middle">2023</text>
+      </g>
+      <g class="node-g hl" data-y="2026" data-t="M 芯片效率达 Nvidia H100 的 8.3 倍 (tokens/$)" transform="translate(1120,80)">
+        <circle class="node-c" r="20"/>
+        <text class="year-lbl" y="52" text-anchor="middle">2026</text>
+      </g>
+    </svg>
+    <div class="tooltip" id="chipTip"><div class="y"></div><div class="t"></div></div>
+  </div>
+
+  <div class="vtl" style="margin-top:72px">
+    <div class="node" data-reveal>
+      <div class="year">2008</div>
+      <div class="ev zh">挖来 <strong>Johny Srouji</strong> —— 后来的 A4 芯片之父</div>
+    </div>
+    <div class="node" data-reveal data-reveal-delay="1">
+      <div class="year">2010</div>
+      <div class="ev zh">自研 A4，首用于 iPad</div>
+    </div>
+    <div class="node highlight" data-reveal data-reveal-delay="2">
+      <div class="year">2020</div>
+      <div class="ev zh"><strong>M1</strong> 发布，震惊行业</div>
+    </div>
+    <div class="node" data-reveal data-reveal-delay="3">
+      <div class="year">2023</div>
+      <div class="ev zh">全线产品完成 Apple Silicon 化</div>
+    </div>
+    <div class="node highlight" data-reveal data-reveal-delay="4">
+      <div class="year">2026</div>
+      <div class="ev zh">M 芯片效率达 <strong>Nvidia H100 的 8.3 倍</strong>（tokens / $）</div>
+    </div>
+  </div>
+
+  <div class="close-quote zh red-accent" data-reveal data-reveal-delay="5" style="margin-top:88px">
+    <strong>Jobs 想做没做成的，他做成了。</strong>
+  </div>
+</section>
+
+<!-- ================= SECTION 7 · LEGACY / EVOLUTION / CREATION ================= -->
+<section id="s7" class="sec-light" data-label="07 · Three Proofs">
+  <span class="ix">07 / 15 — Three Proofs</span>
+  <div class="eyebrow" data-reveal>Reversal II · Act 3</div>
+  <h2 class="title-xl zh" data-reveal data-reveal-delay="1">三代产品，三重证明。</h2>
+  <div class="body-lg zh" data-reveal data-reveal-delay="2" style="margin-top:24px">
+    他守住了 Jobs 给的，<br/>完成了 Jobs 想做的，<br/>开创了 Jobs 之后的。
+  </div>
+
+  <div class="three-col">
+    <div data-reveal data-reveal-delay="1">
+      <div class="corner"><span class="n">01</span><span>LEGACY</span></div>
+      <svg class="pic" viewBox="0 0 64 64" aria-hidden="true">
+        <rect x="18" y="6" width="28" height="52" rx="5" ry="5"/>
+        <line x1="27" y1="11" x2="37" y2="11"/>
+        <circle cx="32" cy="52" r="2.4"/>
+      </svg>
+      <div class="tag">Legacy · 继承</div>
+      <div class="prod">iPhone</div>
+      <div class="meta">2011 → 2026</div>
+      <div class="big zh">$471亿 → <span class="accent">$2,096亿</span><br/>+345%</div>
+      <div class="note zh">把 Jobs 的王冠戴稳了 15 年。</div>
+    </div>
+    <div data-reveal data-reveal-delay="2">
+      <div class="corner"><span class="n">02</span><span>EVOLUTION</span></div>
+      <svg class="pic" viewBox="0 0 64 64" aria-hidden="true">
+        <rect x="14" y="14" width="36" height="36" rx="3" ry="3"/>
+        <rect x="24" y="24" width="16" height="16" rx="1"/>
+        <line x1="22" y1="10" x2="22" y2="14"/><line x1="32" y1="10" x2="32" y2="14"/><line x1="42" y1="10" x2="42" y2="14"/>
+        <line x1="22" y1="50" x2="22" y2="54"/><line x1="32" y1="50" x2="32" y2="54"/><line x1="42" y1="50" x2="42" y2="54"/>
+        <line x1="10" y1="22" x2="14" y2="22"/><line x1="10" y1="32" x2="14" y2="32"/><line x1="10" y1="42" x2="14" y2="42"/>
+        <line x1="50" y1="22" x2="54" y2="22"/><line x1="50" y1="32" x2="54" y2="32"/><line x1="50" y1="42" x2="54" y2="42"/>
+        <text x="32" y="36" text-anchor="middle" stroke="none" fill="currentColor" font-family="Inter,sans-serif" font-size="10" font-weight="700">M</text>
+      </svg>
+      <div class="tag">Evolution · 进化</div>
+      <div class="prod">Apple Silicon</div>
+      <div class="meta">2020 · M1 发布</div>
+      <div class="big zh">彻底告别 Intel</div>
+      <div class="note zh">Jobs 时代都没完成的壮举。</div>
+    </div>
+    <div data-reveal data-reveal-delay="3">
+      <div class="corner"><span class="n">03</span><span>CREATION</span></div>
+      <svg class="pic" viewBox="0 0 64 64" aria-hidden="true">
+        <rect x="14" y="14" width="36" height="24" rx="1.5" ry="1.5"/>
+        <path d="M8 44 L56 44 L52 50 L12 50 Z"/>
+        <circle cx="32" cy="26" r="2" fill="currentColor" stroke="none"/>
+        <path d="M34 23.5 C34.5 24 34.5 25 34 25.5" stroke-width="1"/>
+      </svg>
+      <div class="tag">Creation · 开创</div>
+      <div class="prod">MacBook Neo</div>
+      <div class="meta">2026 · 爆款登场</div>
+      <div class="big zh">Cook 时代的纯血产品</div>
+      <div class="note zh">接棒人 John Ternus 的成名作。</div>
+    </div>
+  </div>
+
+  <div class="lec-tl" data-reveal data-reveal-delay="4">
+    <span class="yr hl">2011</span><span class="seg"></span><span class="yr hl">2020</span><span class="seg"></span><span class="yr hl">2026</span>
+  </div>
+
+  <div class="close-quote zh" data-reveal data-reveal-delay="4">
+    继承者守住了过去，<br/>进化者打破了桎梏，<br/>开创者<strong style="color:var(--red);font-weight:700;font-style:normal;font-family:inherit">定义了未来</strong>。
+  </div>
+</section>
+
+<!-- ================= REVERSAL III STRIP ================= -->
+<div class="rev-strip"><span class="num">REV · III</span><span>AI 时代的质疑 · The Contrarian Bet</span><span class="line"></span><span>§ 08 – 10</span></div>
+
+<!-- ================= SECTION 8 · AI Doubt ================= -->
+<section id="s8" class="sec-dark" data-label="08 · AI Doubt">
+  <span class="ix">08 / 15 — AI Doubt</span>
+  <div class="eyebrow" data-reveal>Reversal III · Act 1</div>
+  <div class="pullquote" data-reveal data-reveal-delay="1" style="color:#fff;font-size:clamp(40px,7vw,112px);font-style:italic">
+    <span class="mark" style="color:#6a6a6a">"</span>Apple lost<br/>the AI race.
+  </div>
+  <div class="collage">
+    <div class="q" data-reveal data-reveal-delay="2">"Apple Intelligence 再度跳票。"<span class="src">Q4 · 2024</span></div>
+    <div class="q" data-reveal data-reveal-delay="3">"Siri 升级延期至下一财年。"<span class="src">Q1 · 2025</span></div>
+    <div class="q" data-reveal data-reveal-delay="4">"OpenAI / Google / Nvidia 三巨头领跑。"<span class="src">Q2 · 2025</span></div>
+    <div class="q" data-reveal data-reveal-delay="5">"苹果被 Nvidia 超越，跌至全球第二市值。"<span class="src">Q2 · 2025</span></div>
+  </div>
+  <div class="close-quote zh" data-reveal data-reveal-delay="6" style="color:#e5e5e5;border-color:rgba(255,255,255,.15)">
+    大多数 CEO 会在这一刻，把千亿美金砸进算力军备竞赛。<br/>
+    <strong style="color:var(--red);font-weight:700;font-style:normal;font-family:inherit">Cook 没有。</strong>
+  </div>
+</section>
+
+<!-- ================= SECTION 9 · Contrarian Table ================= -->
+<section id="s9" class="sec-light" data-label="09 · Contrarian">
+  <span class="ix">09 / 15 — Contrarian</span>
+  <div class="eyebrow" data-reveal>Reversal III · Act 2</div>
+  <h2 class="title-xl zh" data-reveal data-reveal-delay="1">当所有人都在囤 H100 时，<br/>他在干什么？</h2>
+
+  <div class="vs-wrap" data-reveal data-reveal-delay="2">
+    <div class="vs-card them">
+      <div class="hd">The Crowd</div>
+      <div class="nm">Meta · Google · Oracle</div>
+      <div class="vs-row"><span class="k">AI CapEx 2025</span><span class="v down"><span class="arrow">▼</span>$600B+</span></div>
+      <div class="vs-row"><span class="k">Strategy</span><span class="v zh">云端军备竞赛</span></div>
+      <div class="vs-row"><span class="k">Stock 2025</span><span class="v down"><span class="arrow">▼</span>震荡 / 下跌</span></div>
+      <div class="vs-row"><span class="k">Outcome</span><span class="v down"><span class="arrow">▼</span>Meta −15% · Oracle −25%</span></div>
+    </div>
+    <div class="vs">VS</div>
+    <div class="vs-card us">
+      <div class="hd">The Contrarian</div>
+      <div class="nm">Apple</div>
+      <div class="vs-row"><span class="k">AI CapEx 2025</span><span class="v up"><span class="arrow">▲</span>$12.7B</span></div>
+      <div class="vs-row"><span class="k">Strategy</span><span class="v">On-Device · Privacy-First</span></div>
+      <div class="vs-row"><span class="k">Stock 2025</span><span class="v up"><span class="arrow">▲</span>+40%</span></div>
+      <div class="vs-row"><span class="k">Market Cap</span><span class="v up"><span class="arrow">▲</span>$4 Trillion</span></div>
+    </div>
+  </div>
+  <div class="cap zh" data-reveal data-reveal-delay="3">
+    他没有追赶起跑线。他在重新定义终点线。
+  </div>
+</section>
+
+<!-- ================= SECTION 10 · Ecosystem ================= -->
+<section id="s10" class="sec-dark" data-label="10 · Ecosystem">
+  <span class="ix">10 / 15 — The Endgame</span>
+  <div class="eyebrow" data-reveal>Reversal III · Act 3</div>
+  <div class="bigstat" data-reveal data-reveal-delay="1">
+    <div class="hero-num counter" data-from="0" data-to="2.5" data-decimals="1" data-suffix="B">0.0B</div>
+    <div class="unit zh">活跃苹果设备<br/><span style="color:var(--gray);font-family:'JetBrains Mono',monospace;font-size:.6em;letter-spacing:.1em">Edge-AI Terminals Worldwide</span></div>
+  </div>
+
+  <div class="wmap" data-reveal data-reveal-delay="2">
+    <svg viewBox="0 0 1000 420" xmlns="http://www.w3.org/2000/svg">
+      <!-- simplified continent blobs -->
+      <path class="continent" d="M120,140 Q100,90 160,80 Q220,70 260,110 Q290,150 260,190 Q220,220 170,210 Q130,200 120,140 Z"/>
+      <path class="continent" d="M180,220 Q200,210 250,225 Q280,270 260,330 Q220,380 190,360 Q160,320 170,280 Q175,245 180,220 Z"/>
+      <path class="continent" d="M430,90 Q480,70 530,85 Q560,110 550,140 Q510,160 470,145 Q430,130 430,90 Z"/>
+      <path class="continent" d="M460,160 Q500,150 540,170 Q560,200 540,230 Q500,240 470,220 Q440,200 460,160 Z"/>
+      <path class="continent" d="M620,100 Q680,80 760,90 Q840,100 880,140 Q890,190 840,220 Q760,240 680,220 Q620,200 620,100 Z"/>
+      <path class="continent" d="M780,280 Q830,270 860,300 Q870,340 830,360 Q780,360 770,320 Q775,295 780,280 Z"/>
+      <!-- density dots -->
+      <circle class="dot" cx="200" cy="130" r="6"/>
+      <circle class="dot" cx="230" cy="165" r="10" style="transition-delay:.1s"/>
+      <circle class="dot" cx="180" cy="180" r="4" style="transition-delay:.2s"/>
+      <circle class="dot" cx="220" cy="290" r="5" style="transition-delay:.3s"/>
+      <circle class="dot" cx="490" cy="110" r="8" style="transition-delay:.15s"/>
+      <circle class="dot" cx="520" cy="140" r="5" style="transition-delay:.25s"/>
+      <circle class="dot" cx="500" cy="200" r="4" style="transition-delay:.35s"/>
+      <circle class="dot" cx="720" cy="130" r="14" style="transition-delay:.1s"/>
+      <circle class="dot" cx="790" cy="160" r="12" style="transition-delay:.2s"/>
+      <circle class="dot" cx="760" cy="200" r="8" style="transition-delay:.3s"/>
+      <circle class="dot" cx="680" cy="180" r="6" style="transition-delay:.4s"/>
+      <circle class="dot" cx="820" cy="320" r="5" style="transition-delay:.5s"/>
+    </svg>
+  </div>
+
+  <div class="kcards">
+    <div data-reveal data-reveal-delay="1">
+      <div class="icon"><svg viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="1"/><path d="M9 2v3 M12 2v3 M15 2v3 M9 19v3 M12 19v3 M15 19v3 M2 9h3 M2 12h3 M2 15h3 M19 9h3 M19 12h3 M19 15h3"/></svg></div>
+      <div class="num">01 · Hardware</div>
+      <div class="h zh">Apple Silicon<br/>单位美金算力<br/><span class="accent">8.3× Nvidia H100</span></div>
+      <div class="d zh">Tokens per dollar，自有架构的复利效应。</div>
+    </div>
+    <div data-reveal data-reveal-delay="2">
+      <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2 L3 6 v6 c0 5 4 9 9 10 c5-1 9-5 9-10 V6 Z"/><path d="M9 12 l2 2 l4-4"/></svg></div>
+      <div class="num">02 · Architecture</div>
+      <div class="h zh">Private Cloud<br/>Compute</div>
+      <div class="d zh">行业唯一隐私优先的 AI 系统架构。</div>
+    </div>
+    <div data-reveal data-reveal-delay="3">
+      <div class="icon"><svg viewBox="0 0 24 24"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg></div>
+      <div class="num">03 · Distribution</div>
+      <div class="h zh">1B+ iPhone Users</div>
+      <div class="d zh">别人花钱都买不到的分发渠道。</div>
+    </div>
+  </div>
+
+  <div class="close-quote zh red-accent" data-reveal data-reveal-delay="4" style="margin-top:80px">
+    <strong>他不需要赢 AI 的起跑线 ——<br/>因为他拥有终点线。</strong>
+  </div>
+</section>
+
+<!-- ================= SECTION 11 · BUSINESS QUADRANT ================= -->
+<section id="s11" class="sec-light" data-label="11 · Business">
+  <span class="ix">11 / 15 — The Business</span>
+  <div class="eyebrow" data-reveal>The Business · FY2011 → FY2025</div>
+  <h2 class="title-xl zh" data-reveal data-reveal-delay="1">他把一家公司，<br/>做成了一个生态王国。</h2>
+
+  <div class="quad">
+    <div data-reveal data-reveal-delay="1">
+      <div class="metric">① Revenue · 营收</div>
+      <div class="from-to"><span class="mono">$108B</span> → <span class="mono">$416.2B</span></div>
+      <div class="mini-axis"><span>FY11</span><span>FY25</span></div>
+      <div class="mini"><div class="mbar" data-h="30"><span class="lbl">$108B</span></div><div class="mbar red" data-h="100"><span class="lbl">$416B</span></div></div>
+      <div class="delta">+285%</div>
+      <div class="hint">3.85× over 15 years</div>
+    </div>
+    <div data-reveal data-reveal-delay="2">
+      <div class="metric">② Net Income · 净利润</div>
+      <div class="from-to"><span class="mono">$25.8B</span> → <span class="mono">$112.0B</span></div>
+      <div class="mini-axis"><span>FY11</span><span>FY25</span></div>
+      <div class="mini"><div class="mbar" data-h="23"><span class="lbl">$26B</span></div><div class="mbar red" data-h="88"><span class="lbl">$112B</span></div></div>
+      <div class="delta">+334%</div>
+      <div class="hint">4.34× — profit grew faster than revenue</div>
+    </div>
+    <div data-reveal data-reveal-delay="3">
+      <div class="metric">③ Gross Margin · 毛利率</div>
+      <div class="from-to"><span class="mono">40.5%</span> → <span class="mono">47.2%</span></div>
+      <div class="line-chart">
+        <svg viewBox="0 0 300 70" preserveAspectRatio="none">
+          <polyline class="pl" points="10,40 80,44 150,36 220,26 290,18" pathLength="600"/>
+          <circle class="pt" cx="10" cy="40" r="3"/>
+          <circle class="pt" cx="80" cy="44" r="3"/>
+          <circle class="pt" cx="150" cy="36" r="3"/>
+          <circle class="pt" cx="220" cy="26" r="3"/>
+          <circle class="pt hl" cx="290" cy="18" r="4"/>
+        </svg>
+      </div>
+      <div class="mini-axis"><span>11</span><span>14</span><span>18</span><span>22</span><span>25</span></div>
+      <div class="delta">+6.7pp</div>
+      <div class="hint zh">硬件公司里的奢侈品毛利率。</div>
+    </div>
+    <div data-reveal data-reveal-delay="4">
+      <div class="metric">④ Services · 服务收入</div>
+      <div class="from-to"><span class="mono">~$9B (8%)</span> → <span class="mono">$100B+ (24%)</span></div>
+      <div class="donut-pair">
+        <div class="dp-item">
+          <svg viewBox="0 0 90 90" class="dp-svg">
+            <circle class="dp-track" cx="45" cy="45" r="38" fill="none" stroke="rgba(0,0,0,.08)" stroke-width="8"/>
+            <circle class="dp-arc dp-arc-gray" cx="45" cy="45" r="38" fill="none" stroke="#8E8E93" stroke-width="8" stroke-linecap="round" stroke-dasharray="100" stroke-dashoffset="100" transform="rotate(-90 45 45)" pathLength="100" data-pct="8"/>
+            <text x="45" y="51" text-anchor="middle" font-family="Inter,sans-serif" font-size="20" font-weight="800" fill="#000">8%</text>
+          </svg>
+          <div class="dp-lbl">FY11</div>
+        </div>
+        <div class="dp-item">
+          <svg viewBox="0 0 90 90" class="dp-svg">
+            <circle class="dp-track" cx="45" cy="45" r="38" fill="none" stroke="rgba(0,0,0,.08)" stroke-width="8"/>
+            <circle class="dp-arc dp-arc-red" cx="45" cy="45" r="38" fill="none" stroke="#E30613" stroke-width="8" stroke-linecap="round" stroke-dasharray="100" stroke-dashoffset="100" transform="rotate(-90 45 45)" pathLength="100" data-pct="24"/>
+            <text x="45" y="51" text-anchor="middle" font-family="Inter,sans-serif" font-size="20" font-weight="800" fill="#E30613">24%</text>
+          </svg>
+          <div class="dp-lbl">FY25</div>
+        </div>
+      </div>
+      <div class="delta accent">×3 share · ×11 size</div>
+      <div class="hint zh">占营收比重翻了三倍。</div>
+    </div>
+  </div>
+
+  <div class="close-quote zh red-accent" data-reveal data-reveal-delay="5">
+    <strong>iPhone 是前菜，<br/>真正的主菜是 Services ——<br/>Cook 亲手做的那道菜。</strong>
+  </div>
+</section>
+
+<!-- ================= SECTION 12 · SHAREHOLDERS ================= -->
+<section id="s12" class="sec-dark" data-label="12-A · Shareholders">
+  <span class="ix">12-A / 15 — Shareholders</span>
+  <div class="eyebrow" data-reveal>The Shareholders · 2012 → 2025 Cumulative</div>
+  <h2 class="title-xl zh" data-reveal data-reveal-delay="1">他花了 6,700 亿美金买回股票。<br/>这是什么概念？</h2>
+
+  <div class="epicbar" data-reveal data-reveal-delay="2">
+    <div class="raw mono">$670,000,000,000</div>
+    <div class="eq zh">= 全球第 21 大经济体的 GDP<br/>= 超过 S&P 500 所有消费品公司回购之和</div>
+  </div>
+
+  <div class="pillars">
+    <div data-reveal data-reveal-delay="1">
+      <div class="label">Buybacks · 回购总额</div>
+      <div class="v accent">$670B+</div>
+      <div class="sub">since 2012</div>
+      <div class="pillar-bar red" data-h="100"></div>
+    </div>
+    <div data-reveal data-reveal-delay="2">
+      <div class="label">Dividends · 分红累计</div>
+      <div class="v">$180B+</div>
+      <div class="sub">since 2012</div>
+      <div class="pillar-bar" data-h="28"></div>
+    </div>
+    <div data-reveal data-reveal-delay="3">
+      <div class="label">Total Return · 股东总回报</div>
+      <div class="v">+1,886%</div>
+      <div class="sub">vs. SPX +483%</div>
+      <div class="pillar-bar" data-h="43"></div>
+    </div>
+  </div>
+
+  <div class="band" data-reveal data-reveal-delay="4">
+    <div>
+      <div class="i">① Shares Outstanding</div>
+      <div class="v">−40%</div>
+      <div class="t zh">26B → 15B 股</div>
+    </div>
+    <div>
+      <div class="i">② FY2025 Return to SH</div>
+      <div class="v">$106.1B</div>
+      <div class="t zh">单一财年</div>
+    </div>
+    <div>
+      <div class="i">③ 10Y Total Return</div>
+      <div class="v">+4,971%</div>
+      <div class="t zh">复利效应</div>
+    </div>
+    <div>
+      <div class="i">④ FY2025 CapEx</div>
+      <div class="v">$12.7B</div>
+      <div class="t zh">&lt;10% of Alphabet</div>
+    </div>
+  </div>
+
+  <div class="invbox zh" data-reveal data-reveal-delay="5">
+    <strong>Meta</strong> 2026 CapEx 暴增，股价跌 15%+。<br/>
+    <strong>Oracle</strong> 本月跌 25%。<br/>
+    <strong>Apple</strong>？股价涨 40%，市值 $4 万亿。<br/>
+    <span style="color:var(--gray);font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.14em;font-style:normal;display:block;margin-top:12px">—— 当同行疯狂建算力，他在建生态。</span>
+  </div>
+
+  <div class="close-quote zh red-accent" data-reveal data-reveal-delay="6" style="margin-top:60px;border-color:rgba(255,255,255,.15)">
+    巴菲特买了 <strong>30%+</strong> 的苹果仓位，<br/>
+    不是因为他爱 iPhone ——<br/>
+    是因为他爱一个<strong>每年把千亿现金还给股东</strong>的 CEO。
+  </div>
+</section>
+
+<!-- ================= SECTION 12b · TSR vs S&P 500 ================= -->
+<section id="s12b" class="sec-dark" data-label="12-B · TSR vs SPX">
+  <span class="ix">12-B / 15 — TSR Curve</span>
+  <div class="eyebrow" data-reveal>Cumulative Total Return · 2011/08 = 100</div>
+  <h2 class="title-xl zh" data-reveal data-reveal-delay="1">15 年复利，<br/>一条曲线讲完。</h2>
+
+  <div class="tsr-chart" data-reveal data-reveal-delay="2">
+    <svg viewBox="0 0 1000 420" preserveAspectRatio="none">
+      <!-- y grid -->
+      <line class="axis" x1="60" y1="40"  x2="960" y2="40"/>
+      <line class="axis" x1="60" y1="140" x2="960" y2="140"/>
+      <line class="axis" x1="60" y1="240" x2="960" y2="240"/>
+      <line class="axis" x1="60" y1="340" x2="960" y2="340"/>
+      <line class="axis" x1="60" y1="40"  x2="60"  y2="380"/>
+      <!-- y labels -->
+      <text class="ylbl" x="50" y="44"  text-anchor="end">2000%</text>
+      <text class="ylbl" x="50" y="144" text-anchor="end">1500%</text>
+      <text class="ylbl" x="50" y="244" text-anchor="end">1000%</text>
+      <text class="ylbl" x="50" y="344" text-anchor="end">500%</text>
+      <text class="ylbl" x="50" y="384" text-anchor="end">0%</text>
+      <!-- x labels -->
+      <text class="glbl" x="60"  y="410" text-anchor="start">2011</text>
+      <text class="glbl" x="230" y="410" text-anchor="middle">2014</text>
+      <text class="glbl" x="400" y="410" text-anchor="middle">2017</text>
+      <text class="glbl" x="570" y="410" text-anchor="middle">2020</text>
+      <text class="glbl" x="740" y="410" text-anchor="middle">2023</text>
+      <text class="glbl" x="960" y="410" text-anchor="end">2026</text>
+      <!-- SPX line (ends at ~483%, y = 380 - (483/2000)*340 = 380 - 82 = 298) -->
+      <polyline class="spx-line" points="60,380 120,376 180,372 240,368 300,362 360,354 420,346 480,338 540,330 600,322 660,316 720,312 780,308 840,304 900,300 960,298" pathLength="2000"/>
+      <!-- AAPL line (ends at ~1886%, y = 380 - (1886/2000)*340 = 380 - 320.6 = 59) -->
+      <polyline class="aapl-line" points="60,380 120,358 180,340 240,324 300,300 360,282 420,266 480,240 540,220 600,188 660,156 720,132 780,110 840,88 900,72 960,59" pathLength="2000"/>
+      <!-- end points -->
+      <circle class="pt" cx="960" cy="59" r="5" fill="#E30613"/>
+      <circle class="pt" cx="960" cy="298" r="4" fill="#fff" opacity=".8"/>
+      <!-- end labels -->
+      <text class="pt end-lbl end-aapl" x="950" y="44" text-anchor="end">AAPL · +1,886%</text>
+      <text class="pt end-lbl end-spx"  x="950" y="288" text-anchor="end">S&amp;P 500 · +483%</text>
+    </svg>
+  </div>
+
+  <div class="tsr-legend" data-reveal data-reveal-delay="3">
+    <span><span class="sw r"></span>AAPL · Tim Cook 任期</span>
+    <span><span class="sw w"></span>S&amp;P 500 · 同期</span>
+    <span style="color:var(--red)">↗ 4× 跑赢大盘</span>
+  </div>
+
+  <div class="close-quote zh red-accent" data-reveal data-reveal-delay="4" style="border-color:rgba(255,255,255,.15)">
+    <strong>两条曲线之间的距离 ——<br/>就是 Cook 给股东的答卷。</strong>
+  </div>
+</section>
+
+<!-- ================= SECTION 12c · PRODUCT TIMELINE ================= -->
+<section id="s12c" class="sec-light" data-label="12-C · Product Timeline">
+  <span class="ix">12-C / 15 — Product Timeline</span>
+  <div class="eyebrow" data-reveal>Products Shipped · 2011 → 2026</div>
+  <h2 class="title-xl zh" data-reveal data-reveal-delay="1">15 年，<br/>一条产品脊梁。</h2>
+
+  <div class="ptl" data-reveal data-reveal-delay="2">
+    <div class="spine"></div>
+    <div class="ptl-track">
+      <div class="ptl-item">
+        <div class="ptl-year">2012</div>
+        <div class="ptl-dot"></div>
+        <div class="ptl-prod">iPad mini</div>
+        <div class="ptl-tag">Form Factor</div>
+      </div>
+      <div class="ptl-item hl">
+        <div class="ptl-year">2015</div>
+        <div class="ptl-dot"></div>
+        <div class="ptl-prod">Apple Watch</div>
+        <div class="ptl-tag">New Category</div>
+      </div>
+      <div class="ptl-item">
+        <div class="ptl-year">2016</div>
+        <div class="ptl-dot"></div>
+        <div class="ptl-prod">AirPods</div>
+        <div class="ptl-tag">Audio</div>
+      </div>
+      <div class="ptl-item">
+        <div class="ptl-year">2019</div>
+        <div class="ptl-dot"></div>
+        <div class="ptl-prod">Services 重构</div>
+        <div class="ptl-tag">TV+ · Arcade</div>
+      </div>
+      <div class="ptl-item hl">
+        <div class="ptl-year">2020</div>
+        <div class="ptl-dot"></div>
+        <div class="ptl-prod">M1 · Apple Silicon</div>
+        <div class="ptl-tag">Silicon Coup</div>
+      </div>
+      <div class="ptl-item">
+        <div class="ptl-year">2024</div>
+        <div class="ptl-dot"></div>
+        <div class="ptl-prod">Vision Pro</div>
+        <div class="ptl-tag">Spatial Computing</div>
+      </div>
+      <div class="ptl-item">
+        <div class="ptl-year">2025</div>
+        <div class="ptl-dot"></div>
+        <div class="ptl-prod">iPhone Air</div>
+        <div class="ptl-tag">Reinvented</div>
+      </div>
+      <div class="ptl-item hl">
+        <div class="ptl-year">2026</div>
+        <div class="ptl-dot"></div>
+        <div class="ptl-prod">MacBook Neo</div>
+        <div class="ptl-tag">Cook 的告别作</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="close-quote zh" data-reveal data-reveal-delay="3" style="margin-top:80px">
+    每一颗红点，都是一次下注。<br/>
+    <strong style="color:var(--red);font-weight:700;font-style:normal;font-family:inherit">他下对了其中每一注。</strong>
+  </div>
+</section>
+
+<!-- ================= SECTION 13 · SUCCESSION ================= -->
+<section id="s13" class="sec-light" data-label="13 · Succession">
+  <span class="ix">13 / 15 — Succession</span>
+  <div class="eyebrow" data-reveal>Succession · 2026/09/01</div>
+  <h2 class="title-xl zh" data-reveal data-reveal-delay="1">下一个 15 年，<br/>交给他们。</h2>
+
+  <div class="twocol">
+    <div data-reveal data-reveal-delay="1">
+      <div class="portrait">JT</div>
+      <div class="role">Incoming CEO</div>
+      <div class="name">John Ternus</div>
+      <ul class="zh">
+        <li>25 年苹果老将</li>
+        <li>硬件工程负责人</li>
+        <li>iPhone Air / MacBook Neo 操盘手</li>
+        <li>2026 / 09 / 01 正式接任</li>
+      </ul>
+    </div>
+    <div data-reveal data-reveal-delay="2">
+      <div class="portrait">JS</div>
+      <div class="role">Chief Hardware Officer</div>
+      <div class="name">Johny Srouji</div>
+      <ul class="zh">
+        <li>A4 芯片之父</li>
+        <li>新任首席硬件官</li>
+        <li>Apple Silicon 战略核心推手</li>
+        <li>十五年磨一剑</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="close-quote zh" data-reveal data-reveal-delay="5">
+    Cook 的选人，<br/>就像 Jobs 当年选 Cook。
+  </div>
+</section>
+
+<!-- ================= SECTION R · RETIREMENT ================= -->
+<section id="sR" class="sec-dark" data-label="R · Semi-Retirement">
+  <span class="ix">Bonus — The Semi-Retirement Fund</span>
+  <div class="eyebrow" data-reveal>The Semi-Retirement Fund · 一个没人敢算的账</div>
+  <h2 class="title-xl zh" data-reveal data-reveal-delay="1">跟着 Cook 投资苹果，<br/>你的账户早就有底气。</h2>
+  <div class="subtitle-en" data-reveal data-reveal-delay="2" style="margin-top:24px;color:#fff;opacity:.55;font-style:italic">Cook steps down. Your portfolio doesn't need to.</div>
+
+  <div class="ret-wrap">
+    <!-- Hero calc card -->
+    <div class="ret-card" data-reveal data-reveal-delay="3">
+      <div class="ret-date">2011 · 08 · 24</div>
+      <div class="ret-line1">你买入 $10,000 AAPL</div>
+
+      <div class="ret-arrow">↓</div>
+
+      <div class="ret-date">2026 · 04 · 21</div>
+      <div class="ret-line1">你的账户余额</div>
+
+      <div class="ret-divider"></div>
+
+      <div class="ret-big counter" id="retBig" data-to="198600" data-prefix="$" style="font-size: 100px">$0</div>
+      <div class="ret-pct">+1,886% · 14.7 年</div>
+      <div class="ret-cagr">
+        <span class="lbl">年化回报 CAGR</span>
+        <span class="val">+22.6%</span>
+      </div>
+    </div>
+
+    <!-- 3-col comparison -->
+    <div class="ret-cols" data-reveal data-reveal-delay="4">
+      <div class="ret-col">
+        <div class="ret-col-name">S&amp;P 500</div>
+        <div class="ret-col-start">$10,000</div>
+        <div class="ret-col-down">↓</div>
+        <div class="ret-col-end">$58,300</div>
+        <div class="ret-col-pct">+483%</div>
+        <div class="ret-bar-wrap"><div class="ret-bar"></div></div>
+        <div class="ret-col-cagr"><span class="k">年化</span><span class="v">+12.8%</span></div>
+        <div class="ret-col-tag">普通投资者</div>
+      </div>
+      <div class="ret-col">
+        <div class="ret-col-name">QQQ</div>
+        <div class="ret-col-start">$10,000</div>
+        <div class="ret-col-down">↓</div>
+        <div class="ret-col-end">$75,200</div>
+        <div class="ret-col-pct">+652%</div>
+        <div class="ret-bar-wrap"><div class="ret-bar"></div></div>
+        <div class="ret-col-cagr"><span class="k">年化</span><span class="v">+14.8%</span></div>
+        <div class="ret-col-tag">聪明钱</div>
+      </div>
+      <div class="ret-col hl">
+        <div class="ret-col-name">AAPL</div>
+        <div class="ret-col-start">$10,000</div>
+        <div class="ret-col-down">↓</div>
+        <div class="ret-col-end">$198,600</div>
+        <div class="ret-col-pct">+1,886%</div>
+        <div class="ret-bar-wrap"><div class="ret-bar"></div></div>
+        <div class="ret-col-cagr"><span class="k">年化</span><span class="v">+22.6%</span></div>
+        <div class="ret-col-tag">信了 Cook 的人</div>
+      </div>
+    </div>
+
+    <!-- Closing -->
+    <div class="ret-closing" data-reveal data-reveal-delay="5">
+      <div class="zh">“信他的人，账户里早有退休的底气。”</div>
+      <div class="en">"If you believed in him, your portfolio already semi-retired."</div>
+    </div>
+
+    <div class="ret-footer" data-reveal data-reveal-delay="6">
+      计算口径：Yahoo Finance 2011/8/24 — 2026/4/21<br/>
+      股价纯涨 +1,886%（拆股已调整）<br/>
+      数据来源：Yahoo Finance / Apple Inc. SEC Filings
+    </div>
+  </div>
+</section>
+
+<!-- ================= SECTION 14 · CODA ================= -->
+<section id="s14" class="sec-dark" data-label="14 · Coda">
+  <span class="ix">14 / 15 — Coda</span>
+  <div class="eyebrow" data-reveal>— Tim Cook · April 21, 2026</div>
+  <div class="goodbye" data-reveal data-reveal-delay="1">
+    <span style="display:block;font-size:1.2em;font-weight:700;font-style:normal;font-family:'Inter',serif;opacity:.3;line-height:0;margin-bottom:.3em">"</span>
+    This is not<br/>a goodbye.
+  </div>
+  <div class="sig" data-reveal data-reveal-delay="2">— Tim Cook · April 21, 2026</div>
+  <div class="sig-hw" data-reveal data-reveal-delay="3">Tim Cook</div>
+
+  <div class="body-lg zh" data-reveal data-reveal-delay="3" style="margin-top:88px;color:#cfcfcf;max-width:42ch">
+    他走下 CEO 位置时，<br/>
+    苹果 <span style="color:#fff">$4 万亿市值</span>，<span style="color:#fff">25 亿活跃设备</span>，<br/>
+    行业从质疑他 → 变成研究他。
+  </div>
+  <div class="close-quote zh red-accent" data-reveal data-reveal-delay="4" style="border-color:rgba(255,255,255,.15)">
+    2011 年没人想到这一天 ——<br/>
+    <strong>除了他自己。</strong>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div>
+    <div class="mark zh">An Investor's Tribute.</div>
+    <div class="small" style="margin-top:16px;max-width:52ch">
+      15 years of operational excellence, capital discipline, and the quiet courage<br/>
+      to not chase the crowd. This is what great CEOs leave behind.
+    </div>
+  </div>
+  <div class="meta">
+    2026 · 04 · 21<br/>
+    Sources · Apple Inc. 10-K / 8-K<br/>
+    Yahoo Finance · Macrotrends<br/>
+    S&amp;P Global · CNBC
+  </div>
+</footer>
+
+<script>
+// ---------- Intersection reveal ----------
+const revealEls = document.querySelectorAll('[data-reveal]');
+function showEl(el){
+  if (el.classList.contains('in')) return;
+  el.classList.add('in');
+  if (el.classList.contains('counter')) animateCounter(el);
+  el.querySelectorAll?.('.counter').forEach(animateCounter);
+  // Animate dual donuts
+  el.querySelectorAll?.('.dp-arc').forEach(arc=>{
+    const pct = parseFloat(arc.dataset.pct || "0");
+    requestAnimationFrame(()=>{ arc.style.strokeDashoffset = String(100 - pct); });
+  });
+}
+const io = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{ if(e.isIntersecting) showEl(e.target); });
+},{threshold:0.05, rootMargin:'0px 0px -5% 0px'});
+revealEls.forEach(el=>io.observe(el));
+
+// Fallback: reveal anything already in viewport after load
+function revealInViewport(){
+  const vh = window.innerHeight;
+  revealEls.forEach(el=>{
+    const r = el.getBoundingClientRect();
+    if (r.top < vh && r.bottom > 0) showEl(el);
+  });
+}
+window.addEventListener('load', ()=>{ requestAnimationFrame(revealInViewport); });
+setTimeout(revealInViewport, 300);
+// Safety net: after 2s, show everything still hidden in viewport
+setTimeout(()=>{
+  revealEls.forEach(el=>{
+    const r = el.getBoundingClientRect();
+    if (r.top < window.innerHeight * 1.1) showEl(el);
+  });
+}, 1500);
+
+// also observe section to trigger fills
+document.querySelectorAll('section').forEach(sec=>{
+  const io2 = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); } });
+  },{threshold:0.25});
+  io2.observe(sec);
+});
+
+// ---------- Counter animation ----------
+function animateCounter(el){
+  if (el.__done) return; el.__done = true;
+  const to = parseFloat(el.dataset.to);
+  const from = parseFloat(el.dataset.from||"0");
+  const decimals = parseInt(el.dataset.decimals||"0");
+  const suffix = el.dataset.suffix || "";
+  const prefix = el.dataset.prefix || "";
+  const dur = 1600;
+  const start = performance.now();
+  function tick(now){
+    const t = Math.min(1, (now-start)/dur);
+    const eased = 1 - Math.pow(1-t, 3);
+    const v = from + (to-from)*eased;
+    const formatted = decimals ? v.toFixed(decimals) : Math.round(v).toLocaleString('en-US');
+    el.textContent = prefix + formatted + suffix;
+    if (t<1) requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+}
+
+// ---------- Scroll progress ----------
+const progress = document.getElementById('progress');
+window.addEventListener('scroll', ()=>{
+  const h = document.documentElement;
+  const pct = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+  progress.style.width = pct + '%';
+},{passive:true});
+
+// ---------- Nav active ----------
+const navLinks = document.querySelectorAll('#nav a, #mnav a');
+const hrefs = [...new Set([...navLinks].map(a=>a.getAttribute('href')))];
+const navTargets = hrefs.map(h => document.querySelector(h));
+const navIO = new IntersectionObserver((entries)=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      const href = '#' + e.target.id;
+      navLinks.forEach(a=>a.classList.toggle('active', a.getAttribute('href')===href));
+    }
+  });
+},{rootMargin:'-40% 0px -55% 0px'});
+navTargets.forEach(t=>t && navIO.observe(t));
+
+// ---------- Chip timeline tooltip ----------
+const chipTl = document.getElementById('chipTl');
+const chipTip = document.getElementById('chipTip');
+if (chipTl && chipTip){
+  chipTl.querySelectorAll('.node-g').forEach(g=>{
+    g.addEventListener('mouseenter', (e)=>{
+      const rect = chipTl.getBoundingClientRect();
+      const node = g.querySelector('circle').getBoundingClientRect();
+      const x = node.left - rect.left + node.width/2;
+      const y = node.top - rect.top - 10;
+      chipTip.style.left = x + 'px';
+      chipTip.style.top = y + 'px';
+      chipTip.querySelector('.y').textContent = g.dataset.y;
+      chipTip.querySelector('.t').textContent = g.dataset.t;
+      chipTip.classList.add('show');
+      chipTip.style.transform = 'translate(-50%, calc(-100% - 10px))';
+    });
+    g.addEventListener('mouseleave', ()=> chipTip.classList.remove('show'));
+  });
+}
+</script>
+</body>
+</html>
